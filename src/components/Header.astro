@@ -18,29 +18,45 @@ import { navigation, siteMeta } from "../data/site";
       </span>
     </a>
 
-    <nav class="site-nav" aria-label="Основная навигация">
-      {
-        navigation.map((item) => (
-          <a
-            href={item.href}
-            data-speech-label={item.speechLabel ?? item.label}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
+    <button
+      class="site-header__menu-toggle"
+      type="button"
+      data-menu-toggle
+      data-speech-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+      <strong>Меню</strong>
+    </button>
 
-    <div class="site-header__actions">
-      <button
-        class="site-header__vision-toggle"
-        type="button"
-        data-vision-toggle
-        aria-pressed="false"
-      >
-        Версия для слабовидящих
-      </button>
-      <a class="site-header__cta" href="#contacts">Записаться</a>
+    <div class="site-header__panel" data-menu-panel>
+      <nav class="site-nav" id="site-navigation" aria-label="Основная навигация">
+        {
+          navigation.map((item) => (
+            <a
+              href={item.href}
+              data-speech-label={item.speechLabel ?? item.label}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="site-header__actions">
+        <button
+          class="site-header__vision-toggle"
+          type="button"
+          data-vision-toggle
+          aria-pressed="false"
+        >
+          Версия для слабовидящих
+        </button>
+        <a class="site-header__cta" href="#contacts">Записаться</a>
+      </div>
     </div>
   </div>
 </header>

@@ -45,11 +45,14 @@ body[data-vision-mode="accessible"] {
   background: #ffffff;
   font-size: var(--accessible-font-size, 16px);
   line-height: 1.85;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 body[data-vision-mode="accessible"] .site-header,
 body[data-vision-mode="accessible"] .site-nav,
 body[data-vision-mode="accessible"] .site-nav a,
+body[data-vision-mode="accessible"] .site-header__menu-toggle,
 body[data-vision-mode="accessible"] .site-header__vision-toggle,
 body[data-vision-mode="accessible"] .site-header__cta,
 body[data-vision-mode="accessible"] .accessible-panel,
@@ -251,6 +254,14 @@ code {
   min-height: 88px;
 }
 
+.site-header__panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  gap: 1rem;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -276,6 +287,37 @@ code {
   justify-content: center;
   gap: 1.25rem;
   font-size: 0.96rem;
+}
+
+.site-header__menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 52px;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(20, 33, 63, 0.14);
+  border-radius: 999px;
+  color: var(--color-navy-950);
+  background: rgba(255, 255, 255, 0.94);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.site-header__menu-toggle span {
+  display: block;
+  width: 1.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform-origin: center;
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+.site-header__menu-toggle strong {
+  font-size: 0.94rem;
 }
 
 .site-nav a,
@@ -537,7 +579,7 @@ code {
 .programs-intro__card {
   display: grid;
   gap: 0.4rem;
-  min-width: 22rem;
+  min-width: 0;
   padding: 1.25rem 1.4rem;
   border: 1px solid rgba(20, 33, 63, 0.08);
   border-radius: var(--radius-md);
@@ -2425,20 +2467,251 @@ code {
   }
 }
 
-@media (max-width: 960px) {
-  .site-header__inner,
+@media (max-width: 1059px) {
   .hero__grid,
   .legal-hero__grid,
   .official-callout,
-  .site-footer__grid,
-  .format-grid,
-  .theory-modes,
   .docs-section,
   .service-teaser,
   .timeline__board,
+  .contacts__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.9rem 1.1rem;
+    align-items: center;
+    padding: 0.95rem 0;
+  }
+
+  .site-header__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+    gap: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .site-header__actions {
+    gap: 0.6rem;
+  }
+
+  .site-header__vision-toggle,
+  .site-header__cta {
+    min-height: 46px;
+    padding: 0 0.95rem;
+    font-size: 0.88rem;
+  }
+
+  .hero {
+    padding-bottom: 4.8rem;
+  }
+
+  .hero__background {
+    display: block;
+    top: 0;
+    right: -8%;
+    bottom: -6%;
+    left: 34%;
+    opacity: 0.96;
+    background: url("/images/hero/hero-driving-school-main.webp") 82% 100% / cover no-repeat;
+  }
+
+  .hero__background::before {
+    inset: -2% -4% -2% -18%;
+    background:
+      linear-gradient(90deg, rgba(246, 243, 236, 1) 0%, rgba(246, 243, 236, 0.98) 16%, rgba(246, 243, 236, 0.9) 28%, rgba(246, 243, 236, 0.72) 40%, rgba(246, 243, 236, 0.36) 54%, rgba(246, 243, 236, 0.1) 68%, rgba(246, 243, 236, 0.3) 100%),
+      linear-gradient(180deg, rgba(246, 243, 236, 0.24) 0%, rgba(246, 243, 236, 0.02) 24%, transparent 58%, rgba(246, 243, 236, 0.72) 100%);
+  }
+
+  .hero__background::after {
+    inset: 8% -4% -4% -6%;
+    background:
+      radial-gradient(circle at 16% 52%, rgba(246, 243, 236, 0.76) 0%, rgba(246, 243, 236, 0.32) 18%, rgba(246, 243, 236, 0.08) 34%, transparent 52%),
+      radial-gradient(circle at 58% 100%, rgba(212, 166, 58, 0.12), transparent 52%);
+    filter: blur(10px);
+  }
+
+  .hero__visual {
+    display: none;
+    min-height: 0;
+    background: none;
+  }
+
+  .feedback-block,
+  .feedback-form__row,
+  .pricing-intro,
+  .programs-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .programs-intro {
+    gap: 0.95rem;
+  }
+
+  .grid--three,
+  .service-cards,
+  .finance-grid,
+  .fleet-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid--three > :last-child:nth-child(odd),
+  .finance-grid > :last-child:nth-child(odd),
+  .service-cards > :last-child:nth-child(odd),
+  .fleet-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .format-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .format-grid__main,
+  .theory-mode-tile,
+  .format-grid__cards .info-badge {
+    min-height: 0;
+  }
+
+  .format-grid__main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding: 1.8rem;
+  }
+
+  .theory-mode-tile {
+    padding: 1.55rem;
+  }
+
+  .theory-mode-tile--online {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .theory-mode-tile--remote {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .format-grid__card--theory {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .format-grid__card--practice {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .format-grid__card--schedule {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem 1.8rem;
+  }
+
+  .site-footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer__contacts {
+    align-self: start;
+  }
+
+  .hero__stats {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1059px) {
+  .site-header__inner {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    align-items: stretch;
+  }
+
+  .brand {
+    justify-self: start;
+  }
+
+  .site-header__panel {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .site-nav,
+  .site-header__actions {
+    display: contents;
+  }
+
+  .site-nav a,
+  .site-header__vision-toggle,
+  .site-header__cta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 82px;
+    padding: 0.95rem 1.15rem;
+    margin: -1px 0 0 -1px;
+    border: 1px solid rgba(20, 33, 63, 0.08);
+    border-radius: 0;
+    color: var(--color-navy-950);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 243, 236, 0.92));
+    box-shadow: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .site-header__vision-toggle,
+  .site-header__cta {
+    font-size: 0.9rem;
+  }
+
+  .site-header__vision-toggle {
+    border-color: rgba(20, 33, 63, 0.08);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(242, 244, 248, 0.94));
+  }
+
+  .site-header__cta {
+    color: var(--color-navy-950);
+    background:
+      linear-gradient(180deg, rgba(235, 207, 125, 0.94), rgba(212, 166, 58, 0.92));
+  }
+
+  .site-header__vision-toggle,
+  .site-header__cta {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header__inner,
+  .format-grid,
+  .theory-modes,
   .pricing-intro,
   .programs-intro,
-  .contacts__grid {
+  .contacts__grid,
+  .site-footer__grid {
     grid-template-columns: 1fr;
   }
 
@@ -2449,21 +2722,140 @@ code {
 
   .site-header__inner {
     display: grid;
-    justify-items: start;
-    padding: 1rem 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    justify-items: stretch;
+    padding: 0.9rem 0;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .brand__text strong {
+    font-size: 0.98rem;
+  }
+
+  .brand__text small {
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+
+  .site-header__menu-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 16px;
+  }
+
+  .site-header__panel {
+    display: none;
+    grid-column: 1 / -1;
+    margin-top: 0.9rem;
+    padding: 0;
+    border: 1px solid rgba(20, 33, 63, 0.08);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .site-header.is-open .site-header__panel {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .site-header.is-open .site-header__menu-toggle span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .site-header.is-open .site-header__menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-header.is-open .site-header__menu-toggle span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .site-header__menu-toggle strong {
+    display: none;
+  }
+
+  .site-header__menu-toggle span {
+    position: absolute;
+    width: 18px;
+  }
+
+  .site-header__menu-toggle span:nth-child(1) {
+    transform: translateY(-6px);
+  }
+
+  .site-header__menu-toggle span:nth-child(2) {
+    transform: translateY(0);
+  }
+
+  .site-header__menu-toggle span:nth-child(3) {
+    transform: translateY(6px);
   }
 
   .site-nav {
-    justify-content: flex-start;
+    display: contents;
+  }
+
+  .site-nav a {
+    display: grid;
+    place-items: center;
+    grid-column: span 2;
+    min-height: 82px;
+    padding: 0.8rem 0.82rem;
+    margin: -1px 0 0 -1px;
+    border: 1px solid rgba(20, 33, 63, 0.08);
+    border-radius: 0;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 243, 236, 0.92));
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
   }
 
   .site-header__actions {
-    width: 100%;
-    flex-wrap: wrap;
+    display: contents;
+  }
+
+  .site-header__vision-toggle,
+  .site-header__cta {
+    display: grid;
+    place-items: center;
+    grid-column: span 3;
+    min-height: 82px;
+    width: auto;
+    padding: 0.8rem 0.82rem;
+    margin: -1px 0 0 -1px;
+    border: 1px solid rgba(20, 33, 63, 0.08);
+    border-radius: 0;
+    line-height: 1.15;
+    text-align: center;
   }
 
   .site-header__vision-toggle {
-    width: 100%;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(242, 244, 248, 0.94));
+  }
+
+  .site-header__cta {
+    color: var(--color-navy-950);
+    background:
+      linear-gradient(180deg, rgba(235, 207, 125, 0.94), rgba(212, 166, 58, 0.92));
   }
 
   .grid--two,
@@ -2475,6 +2867,16 @@ code {
   .finance-grid,
   .fleet-grid {
     grid-template-columns: 1fr;
+  }
+
+  .format-grid__main,
+  .format-grid__card--theory,
+  .format-grid__card--practice,
+  .format-grid__card--schedule,
+  .theory-mode-tile--online,
+  .theory-mode-tile--remote {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .fleet-section__overview {
@@ -2504,27 +2906,34 @@ code {
   }
 
   .hero__background {
-    display: none;
+    display: block;
+    top: 12%;
+    right: -14%;
+    bottom: 0;
+    left: 18%;
+    opacity: 0.94;
+    background: url("/images/hero/hero-driving-school-main.webp") 76% 100% / cover no-repeat;
+  }
+
+  .hero__background::before {
+    inset: -4% -6% -4% -18%;
+    background:
+      linear-gradient(180deg, rgba(246, 243, 236, 0.96) 0%, rgba(246, 243, 236, 0.82) 26%, rgba(246, 243, 236, 0.36) 56%, rgba(246, 243, 236, 0.94) 100%),
+      linear-gradient(90deg, rgba(246, 243, 236, 0.98) 0%, rgba(246, 243, 236, 0.88) 20%, rgba(246, 243, 236, 0.52) 42%, rgba(246, 243, 236, 0.1) 66%, rgba(246, 243, 236, 0.38) 100%);
+  }
+
+  .hero__background::after {
+    inset: 8% -4% -2% -10%;
+    background:
+      radial-gradient(circle at 18% 38%, rgba(246, 243, 236, 0.74) 0%, rgba(246, 243, 236, 0.34) 22%, rgba(246, 243, 236, 0.08) 38%, transparent 54%),
+      radial-gradient(circle at 54% 100%, rgba(212, 166, 58, 0.14), transparent 52%);
+    filter: blur(10px);
   }
 
   .hero__visual {
-    display: block;
-    min-height: clamp(280px, 52vw, 460px);
-    border-radius: var(--radius-lg);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(246, 243, 236, 0.22)),
-      url("/images/hero/hero-driving-school-main.webp") center bottom / contain no-repeat;
-  }
-
-  .hero__visual::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background:
-      linear-gradient(180deg, rgba(246, 243, 236, 0.22) 0%, rgba(246, 243, 236, 0.04) 24%, transparent 44%, rgba(246, 243, 236, 0.22) 100%),
-      radial-gradient(circle at 50% 100%, rgba(212, 166, 58, 0.12), transparent 56%);
-    pointer-events: none;
+    display: none;
+    min-height: 0;
+    background: none;
   }
 
   .official-callout__actions {
@@ -2536,12 +2945,48 @@ code {
     text-align: left;
   }
 
+  .legal-hero {
+    padding: 3.25rem 0 1.5rem;
+  }
+
+  .legal-hero__aside,
+  .legal-section {
+    padding: 1.3rem;
+  }
+
   .legal-nav {
-    top: 0;
+    position: static;
+    padding-top: 0;
+  }
+
+  .legal-nav__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding: 0.85rem;
+    border-radius: 24px;
+  }
+
+  .legal-nav__list a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: start;
   }
 
   .legal-row {
     grid-template-columns: 1fr;
+    gap: 0.45rem;
+    padding: 0.85rem 0;
+  }
+
+  .legal-row__label {
+    font-size: 0.96rem;
+  }
+
+  .legal-row__value {
+    font-size: 0.96rem;
+    line-height: 1.6;
   }
 }
 
@@ -2567,8 +3012,53 @@ code {
     padding: 3.8rem 0;
   }
 
+  .container {
+    width: min(calc(100% - 1.25rem), var(--container));
+  }
+
+  .site-header__inner {
+    gap: 0.75rem;
+    min-height: 76px;
+  }
+
+  .brand {
+    gap: 0.7rem;
+  }
+
+  .brand img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand__text {
+    gap: 0.12rem;
+  }
+
+  .brand__text strong {
+    font-size: 0.92rem;
+  }
+
+  .brand__text small {
+    font-size: 0.76rem;
+  }
+
+  .site-header__panel {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    padding: 0;
+    border-radius: 24px;
+  }
+
+  .site-nav a {
+    min-height: 74px;
+    padding: 0.72rem;
+    font-size: 0.82rem;
+  }
+
+  .site-header__vision-toggle,
   .site-header__cta {
-    width: 100%;
+    min-height: 74px;
+    padding: 0.72rem;
+    font-size: 0.8rem;
   }
 
   .button {
@@ -2580,14 +3070,63 @@ code {
   }
 
   .hero__visual {
-    min-height: clamp(240px, 64vw, 360px);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(246, 243, 236, 0.26)),
-      url("/images/hero/hero-driving-school-main.webp") center bottom / contain no-repeat;
+    display: none;
+    min-height: 0;
+    background: none;
   }
 
   .timeline__list li {
     grid-template-columns: 1fr;
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero__stats div,
+  .hero__stats div:last-child {
+    flex-basis: auto;
+  }
+
+  .program-card,
+  .pricing-card,
+  .info-badge,
+  .contact-card,
+  .feedback-block__intro,
+  .feedback-form-card,
+  .legal-section,
+  .legal-hero__aside {
+    padding: 1.35rem;
+    border-radius: 26px;
+  }
+
+  .pricing-intro__includes {
+    padding: 1.15rem 1.2rem 1.25rem;
+  }
+
+  .pricing-intro__includes ul {
+    grid-template-columns: 1fr;
+  }
+
+  .legal-hero h1 {
+    font-size: clamp(1.85rem, 1.35rem + 4vw, 2.6rem);
+    line-height: 1.08;
+  }
+
+  .legal-hero p,
+  .legal-row__value {
+    font-size: 0.95rem;
+  }
+
+  .legal-nav__list {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .legal-nav__list a {
+    padding: 0.7rem 0.82rem;
+    font-size: 0.88rem;
   }
 }
 
@@ -2755,4 +3294,437 @@ body[data-vision-mode="accessible"][data-vision-contrast="dark"] .pricing-card l
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .contact-card li::before,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .site-footer__list li::before {
   background: #ffffff !important;
+}
+
+body[data-vision-mode="accessible"] {
+  --accessible-heading-xl: calc(var(--accessible-font-size, 16px) * 2.45);
+  --accessible-heading-lg: calc(var(--accessible-font-size, 16px) * 1.7);
+  --accessible-heading-md: calc(var(--accessible-font-size, 16px) * 1.35);
+  --accessible-heading-sm: calc(var(--accessible-font-size, 16px) * 1.15);
+}
+
+body[data-vision-mode="accessible"] .finance-card,
+body[data-vision-mode="accessible"] .service-card,
+body[data-vision-mode="accessible"] .fleet-card,
+body[data-vision-mode="accessible"] .docs-section__content,
+body[data-vision-mode="accessible"] .docs-section__aside,
+body[data-vision-mode="accessible"] .fleet-section__brief,
+body[data-vision-mode="accessible"] .fleet-section__exam-card,
+body[data-vision-mode="accessible"] .timeline__aside,
+body[data-vision-mode="accessible"] .feedback-block__intro,
+body[data-vision-mode="accessible"] .feedback-form-card,
+body[data-vision-mode="accessible"] .theory-mode-tile,
+body[data-vision-mode="accessible"] .pricing-intro__note,
+body[data-vision-mode="accessible"] .pricing-intro__includes,
+body[data-vision-mode="accessible"] .site-header__panel,
+body[data-vision-mode="accessible"] .legal-nav__list,
+body[data-vision-mode="accessible"] .feedback-form__field input,
+body[data-vision-mode="accessible"] .feedback-form__field select,
+body[data-vision-mode="accessible"] .feedback-form__field textarea,
+body[data-vision-mode="accessible"] .contact-card__schedule,
+body[data-vision-mode="accessible"] .timeline__aside-badge,
+body[data-vision-mode="accessible"] .legal-hero__status {
+  color: #000000 !important;
+  background: #ffffff !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+
+body[data-vision-mode="accessible"] .site-header__inner,
+body[data-vision-mode="accessible"] .site-header__panel,
+body[data-vision-mode="accessible"] .hero__actions,
+body[data-vision-mode="accessible"] .hero__stats,
+body[data-vision-mode="accessible"] .pricing-card__head,
+body[data-vision-mode="accessible"] .finance-card__highlight,
+body[data-vision-mode="accessible"] .service-card__footer,
+body[data-vision-mode="accessible"] .official-callout,
+body[data-vision-mode="accessible"] .feedback-form__row,
+body[data-vision-mode="accessible"] .contacts__grid,
+body[data-vision-mode="accessible"] .site-footer__grid,
+body[data-vision-mode="accessible"] .site-footer__brand,
+body[data-vision-mode="accessible"] .legal-hero__grid,
+body[data-vision-mode="accessible"] .timeline__board,
+body[data-vision-mode="accessible"] .docs-section,
+body[data-vision-mode="accessible"] .programs-intro,
+body[data-vision-mode="accessible"] .pricing-intro,
+body[data-vision-mode="accessible"] .format-grid,
+body[data-vision-mode="accessible"] .fleet-section__overview,
+body[data-vision-mode="accessible"] .feedback-block {
+  gap: 1rem !important;
+}
+
+body[data-vision-mode="accessible"] .program-card,
+body[data-vision-mode="accessible"] .pricing-card,
+body[data-vision-mode="accessible"] .info-badge,
+body[data-vision-mode="accessible"] .contact-card,
+body[data-vision-mode="accessible"] .finance-card,
+body[data-vision-mode="accessible"] .service-card,
+body[data-vision-mode="accessible"] .fleet-card,
+body[data-vision-mode="accessible"] .timeline__aside,
+body[data-vision-mode="accessible"] .docs-section__content,
+body[data-vision-mode="accessible"] .docs-section__aside,
+body[data-vision-mode="accessible"] .fleet-section__brief,
+body[data-vision-mode="accessible"] .fleet-section__exam-card,
+body[data-vision-mode="accessible"] .feedback-block__intro,
+body[data-vision-mode="accessible"] .feedback-form-card,
+body[data-vision-mode="accessible"] .theory-mode-tile,
+body[data-vision-mode="accessible"] .pricing-intro__note,
+body[data-vision-mode="accessible"] .pricing-intro__includes,
+body[data-vision-mode="accessible"] .official-callout,
+body[data-vision-mode="accessible"] .legal-section,
+body[data-vision-mode="accessible"] .legal-hero__aside {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+body[data-vision-mode="accessible"] .finance-card::before,
+body[data-vision-mode="accessible"] .service-card::before,
+body[data-vision-mode="accessible"] .fleet-card::before,
+body[data-vision-mode="accessible"] .pricing-card::after,
+body[data-vision-mode="accessible"] .info-badge::after,
+body[data-vision-mode="accessible"] .hero__visual,
+body[data-vision-mode="accessible"] .hero__background::before,
+body[data-vision-mode="accessible"] .hero__background::after,
+body[data-vision-mode="accessible"] .docs-section__aside::before,
+body[data-vision-mode="accessible"] .fleet-section__exam-card::before {
+  display: none !important;
+}
+
+body[data-vision-mode="accessible"] .info-badge__icon-shell,
+body[data-vision-mode="accessible"] .theory-mode-tile__icon,
+body[data-vision-mode="accessible"] .program-card__crest,
+body[data-vision-mode="accessible"] .site-header__menu-toggle {
+  border: 1px solid currentColor !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body[data-vision-mode="accessible"] .info-badge__icon,
+body[data-vision-mode="accessible"] .theory-mode-tile__icon .info-badge__icon,
+body[data-vision-mode="accessible"] .brand img,
+body[data-vision-mode="accessible"] .fleet-card__media img {
+  filter: grayscale(1) contrast(1.2);
+}
+
+body[data-vision-mode="accessible"] .section-heading h2,
+body[data-vision-mode="accessible"] .legal-hero h1,
+body[data-vision-mode="accessible"] .hero h1 {
+  font-size: var(--accessible-heading-xl) !important;
+  line-height: 1.12 !important;
+}
+
+body[data-vision-mode="accessible"] .program-card h3,
+body[data-vision-mode="accessible"] .pricing-card h3,
+body[data-vision-mode="accessible"] .contact-card h3,
+body[data-vision-mode="accessible"] .info-badge h3,
+body[data-vision-mode="accessible"] .legal-section h2,
+body[data-vision-mode="accessible"] .legal-hero__aside h2,
+body[data-vision-mode="accessible"] .format-grid__main h3,
+body[data-vision-mode="accessible"] .service-card h3,
+body[data-vision-mode="accessible"] .finance-card h3,
+body[data-vision-mode="accessible"] .fleet-card h3,
+body[data-vision-mode="accessible"] .timeline__aside h3,
+body[data-vision-mode="accessible"] .docs-section__aside h3,
+body[data-vision-mode="accessible"] .fleet-section__brief h3,
+body[data-vision-mode="accessible"] .fleet-section__exam-card strong,
+body[data-vision-mode="accessible"] .feedback-block__intro h3 {
+  font-size: var(--accessible-heading-lg) !important;
+  line-height: 1.2 !important;
+}
+
+body[data-vision-mode="accessible"] .pricing-card__head strong,
+body[data-vision-mode="accessible"] .finance-card__highlight strong,
+body[data-vision-mode="accessible"] .contact-card__schedule strong,
+body[data-vision-mode="accessible"] .site-footer__schedule strong,
+body[data-vision-mode="accessible"] .contact-card__detail strong,
+body[data-vision-mode="accessible"] .site-footer__detail strong,
+body[data-vision-mode="accessible"] .hero__stats dd {
+  font-size: var(--accessible-heading-md) !important;
+  line-height: 1.25 !important;
+}
+
+body[data-vision-mode="accessible"] .site-nav a,
+body[data-vision-mode="accessible"] .site-header__cta,
+body[data-vision-mode="accessible"] .site-header__vision-toggle,
+body[data-vision-mode="accessible"] .site-header__menu-toggle,
+body[data-vision-mode="accessible"] .button,
+body[data-vision-mode="accessible"] .accessible-panel button,
+body[data-vision-mode="accessible"] .feedback-form__field span,
+body[data-vision-mode="accessible"] .feedback-form__field input,
+body[data-vision-mode="accessible"] .feedback-form__field select,
+body[data-vision-mode="accessible"] .feedback-form__field textarea,
+body[data-vision-mode="accessible"] .finance-card__eyebrow,
+body[data-vision-mode="accessible"] .finance-card__highlight span,
+body[data-vision-mode="accessible"] .service-card__tag,
+body[data-vision-mode="accessible"] .service-card__head p,
+body[data-vision-mode="accessible"] .contact-card__detail span,
+body[data-vision-mode="accessible"] .contact-card__schedule span,
+body[data-vision-mode="accessible"] .site-footer__detail span,
+body[data-vision-mode="accessible"] .site-footer__schedule span,
+body[data-vision-mode="accessible"] .timeline__aside-badge span,
+body[data-vision-mode="accessible"] .legal-hero__status span,
+body[data-vision-mode="accessible"] .hero__stats dt,
+body[data-vision-mode="accessible"] .section-heading p,
+body[data-vision-mode="accessible"] p,
+body[data-vision-mode="accessible"] li,
+body[data-vision-mode="accessible"] a,
+body[data-vision-mode="accessible"] small,
+body[data-vision-mode="accessible"] strong,
+body[data-vision-mode="accessible"] code {
+  font-size: inherit !important;
+  line-height: 1.7 !important;
+}
+
+body[data-vision-mode="accessible"] .section-heading__eyebrow,
+body[data-vision-mode="accessible"] .hero__lead,
+body[data-vision-mode="accessible"] .program-card__subtitle,
+body[data-vision-mode="accessible"] .finance-card__eyebrow,
+body[data-vision-mode="accessible"] .service-card__tag,
+body[data-vision-mode="accessible"] .feedback-form__field span,
+body[data-vision-mode="accessible"] .contact-card__detail span,
+body[data-vision-mode="accessible"] .contact-card__schedule span,
+body[data-vision-mode="accessible"] .site-footer__detail span,
+body[data-vision-mode="accessible"] .site-footer__schedule span,
+body[data-vision-mode="accessible"] .timeline__aside-badge span,
+body[data-vision-mode="accessible"] .legal-hero__status span {
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  font-weight: 700 !important;
+}
+
+body[data-vision-mode="accessible"] .pricing-intro__includes ul,
+body[data-vision-mode="accessible"] .hero__stats,
+body[data-vision-mode="accessible"] .site-header__panel,
+body[data-vision-mode="accessible"] .feedback-form__row {
+  gap: 1rem !important;
+}
+
+body[data-vision-mode="accessible"] .site-nav a,
+body[data-vision-mode="accessible"] .site-header__cta,
+body[data-vision-mode="accessible"] .site-header__vision-toggle,
+body[data-vision-mode="accessible"] .site-header__menu-toggle,
+body[data-vision-mode="accessible"] .button,
+body[data-vision-mode="accessible"] .pricing-card__head,
+body[data-vision-mode="accessible"] .finance-card__highlight,
+body[data-vision-mode="accessible"] .service-card__footer,
+body[data-vision-mode="accessible"] .contact-card__details,
+body[data-vision-mode="accessible"] .site-footer__details {
+  flex-wrap: wrap !important;
+}
+
+body[data-vision-mode="accessible"] .site-nav a,
+body[data-vision-mode="accessible"] .site-header__cta,
+body[data-vision-mode="accessible"] .site-header__vision-toggle,
+body[data-vision-mode="accessible"] .site-header__menu-toggle,
+body[data-vision-mode="accessible"] .button,
+body[data-vision-mode="accessible"] .feedback-form__field input,
+body[data-vision-mode="accessible"] .feedback-form__field select,
+body[data-vision-mode="accessible"] .feedback-form__field textarea,
+body[data-vision-mode="accessible"] .pricing-card__head strong,
+body[data-vision-mode="accessible"] .finance-card__highlight strong,
+body[data-vision-mode="accessible"] .service-card__price,
+body[data-vision-mode="accessible"] .contact-card__detail strong,
+body[data-vision-mode="accessible"] .contact-card__schedule strong,
+body[data-vision-mode="accessible"] .site-footer__detail strong,
+body[data-vision-mode="accessible"] .site-footer__schedule strong,
+body[data-vision-mode="accessible"] .timeline__aside-badge strong {
+  white-space: normal !important;
+}
+
+body[data-vision-mode="accessible"] .grid--three,
+body[data-vision-mode="accessible"] .grid--two,
+body[data-vision-mode="accessible"] .service-cards,
+body[data-vision-mode="accessible"] .finance-grid,
+body[data-vision-mode="accessible"] .fleet-grid,
+body[data-vision-mode="accessible"] .support-grid,
+body[data-vision-mode="accessible"] .pricing-intro__includes ul,
+body[data-vision-mode="accessible"] .theory-modes {
+  grid-template-columns: 1fr !important;
+}
+
+body[data-vision-mode="accessible"] .format-grid__main,
+body[data-vision-mode="accessible"] .format-grid__card--theory,
+body[data-vision-mode="accessible"] .format-grid__card--practice,
+body[data-vision-mode="accessible"] .format-grid__card--schedule,
+body[data-vision-mode="accessible"] .theory-mode-tile--online,
+body[data-vision-mode="accessible"] .theory-mode-tile--remote,
+body[data-vision-mode="accessible"] .grid--three > *,
+body[data-vision-mode="accessible"] .service-cards > *,
+body[data-vision-mode="accessible"] .finance-grid > *,
+body[data-vision-mode="accessible"] .fleet-grid > * {
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+
+body[data-vision-mode="accessible"][data-vision-size="20"] .hero__grid,
+body[data-vision-mode="accessible"][data-vision-size="20"] .timeline__board,
+body[data-vision-mode="accessible"][data-vision-size="20"] .contacts__grid,
+body[data-vision-mode="accessible"][data-vision-size="20"] .docs-section,
+body[data-vision-mode="accessible"][data-vision-size="20"] .official-callout,
+body[data-vision-mode="accessible"][data-vision-size="20"] .site-footer__grid,
+body[data-vision-mode="accessible"][data-vision-size="20"] .legal-hero__grid,
+body[data-vision-mode="accessible"][data-vision-size="20"] .feedback-block,
+body[data-vision-mode="accessible"][data-vision-size="20"] .programs-intro,
+body[data-vision-mode="accessible"][data-vision-size="20"] .pricing-intro,
+body[data-vision-mode="accessible"][data-vision-size="20"] .format-grid,
+body[data-vision-mode="accessible"][data-vision-size="20"] .fleet-section__overview,
+body[data-vision-mode="accessible"][data-vision-size="20"] .feedback-form__row,
+body[data-vision-mode="accessible"][data-vision-size="20"] .site-header__panel {
+  grid-template-columns: 1fr !important;
+}
+
+body[data-vision-mode="accessible"][data-vision-size="24"] .hero__grid,
+body[data-vision-mode="accessible"][data-vision-size="24"] .timeline__board,
+body[data-vision-mode="accessible"][data-vision-size="24"] .contacts__grid,
+body[data-vision-mode="accessible"][data-vision-size="24"] .docs-section,
+body[data-vision-mode="accessible"][data-vision-size="24"] .official-callout,
+body[data-vision-mode="accessible"][data-vision-size="24"] .site-footer__grid,
+body[data-vision-mode="accessible"][data-vision-size="24"] .legal-hero__grid,
+body[data-vision-mode="accessible"][data-vision-size="24"] .feedback-block,
+body[data-vision-mode="accessible"][data-vision-size="24"] .programs-intro,
+body[data-vision-mode="accessible"][data-vision-size="24"] .pricing-intro,
+body[data-vision-mode="accessible"][data-vision-size="24"] .format-grid,
+body[data-vision-mode="accessible"][data-vision-size="24"] .fleet-section__overview,
+body[data-vision-mode="accessible"][data-vision-size="24"] .feedback-form__row,
+body[data-vision-mode="accessible"][data-vision-size="24"] .site-header__panel {
+  grid-template-columns: 1fr !important;
+}
+
+body[data-vision-mode="accessible"] .pricing-intro__includes li,
+body[data-vision-mode="accessible"] .hero__trust li,
+body[data-vision-mode="accessible"] .program-card li,
+body[data-vision-mode="accessible"] .pricing-card li,
+body[data-vision-mode="accessible"] .contact-card li,
+body[data-vision-mode="accessible"] .site-footer__list li,
+body[data-vision-mode="accessible"] .finance-card li,
+body[data-vision-mode="accessible"] .fleet-section__exam-card li,
+body[data-vision-mode="accessible"] .timeline__aside-points li {
+  color: #000000 !important;
+}
+
+body[data-vision-mode="accessible"] .finance-card li::before,
+body[data-vision-mode="accessible"] .fleet-section__exam-card li::before,
+body[data-vision-mode="accessible"] .timeline__aside-points li::before {
+  background: #000000 !important;
+}
+
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .finance-card,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .service-card,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .fleet-card,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .docs-section__content,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .docs-section__aside,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .fleet-section__brief,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .fleet-section__exam-card,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__aside,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-block__intro,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form-card,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .theory-mode-tile,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .pricing-intro__note,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .pricing-intro__includes,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .site-header__panel,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .legal-nav__list,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field input,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field select,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field textarea,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .contact-card__schedule,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__aside-badge,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .legal-hero__status {
+  color: #ffffff !important;
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .finance-card li,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .fleet-section__exam-card li,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__aside-points li,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field input,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field select,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .feedback-form__field textarea,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .finance-card__eyebrow,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .finance-card__highlight span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .service-card__tag,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .service-card__head p,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .contact-card__detail span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .contact-card__schedule span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .site-footer__detail span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .site-footer__schedule span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__aside-badge span,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .legal-hero__status span {
+  color: #ffffff !important;
+}
+
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .finance-card li::before,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .fleet-section__exam-card li::before,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__aside-points li::before {
+  background: #ffffff !important;
+}
+
+@media (max-width: 1059px) {
+  body[data-vision-mode="accessible"] .site-header {
+    position: static;
+  }
+
+  body[data-vision-mode="accessible"] .site-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-header__menu-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    min-width: 52px;
+    padding: 0.5rem 0.9rem;
+    margin: 0 !important;
+    border: 2px solid currentColor !important;
+    border-radius: 0 !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-header__menu-toggle strong {
+    display: none;
+  }
+
+  body[data-vision-mode="accessible"] .site-header__panel {
+    display: none !important;
+    grid-column: 1 / -1 !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    margin-top: 0.75rem !important;
+    padding: 0 !important;
+    border: 2px solid currentColor !important;
+    border-radius: 0 !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-header.is-open .site-header__panel {
+    display: grid !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-nav,
+  body[data-vision-mode="accessible"] .site-header__actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-nav a,
+  body[data-vision-mode="accessible"] .site-header__vision-toggle,
+  body[data-vision-mode="accessible"] .site-header__cta {
+    min-height: 0 !important;
+    width: 100% !important;
+    padding: 0.9rem 1rem !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-top: 2px solid currentColor !important;
+    border-radius: 0 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    white-space: normal !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+  }
+
+  body[data-vision-mode="accessible"] .site-nav a:first-child {
+    border-top: 0 !important;
+  }
 }

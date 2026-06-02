@@ -194,6 +194,9 @@ const structuredData = {
       const navigationSpeechKey = "kursant-plus-navigation-speech";
       const body = document.body;
       const visionButton = document.querySelector("[data-vision-toggle]");
+      const siteHeader = document.querySelector(".site-header");
+      const menuToggle = document.querySelector("[data-menu-toggle]");
+      const menuPanel = document.querySelector("[data-menu-panel]");
       const accessiblePanel = document.querySelector("[data-accessible-panel]");
       const closeButton = document.querySelector("[data-vision-close]");
       const fontButtons = document.querySelectorAll("[data-font-size]");
@@ -288,6 +291,7 @@ const structuredData = {
 
       const applyFontSize = (size) => {
         body.style.setProperty("--accessible-font-size", `${size}px`);
+        body.dataset.visionSize = String(size);
         updateChoiceState(
           fontButtons,
           (button) => button.dataset.fontSize === String(size),
@@ -315,6 +319,45 @@ const structuredData = {
       applyVisionMode(savedMode);
       applyFontSize(savedFontSize);
       applyContrast(savedContrast);
+
+      const applyMenuState = (open) => {
+        siteHeader?.classList.toggle("is-open", open);
+        body.dataset.menuOpen = open ? "true" : "false";
+        menuToggle?.setAttribute("aria-expanded", String(open));
+        menuToggle?.setAttribute(
+          "data-speech-label",
+          open ? "Закрыть меню" : "Открыть меню",
+        );
+      };
+
+      const closeMenu = () => {
+        applyMenuState(false);
+      };
+
+      applyMenuState(false);
+
+      menuToggle?.addEventListener("click", () => {
+        const open = menuToggle.getAttribute("aria-expanded") !== "true";
+        applyMenuState(open);
+      });
+
+      menuPanel?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 960) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeMenu();
+        }
+      });
 
       if (savedMode) {
         const pendingNavigationSpeech = window.sessionStorage.getItem(navigationSpeechKey);
