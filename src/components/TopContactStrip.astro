@@ -1,0 +1,82 @@
+---
+import { contacts, socialChannels } from "../data/site";
+
+const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
+const emailHref = `mailto:${contacts.email}`;
+---
+
+<section class="top-social" aria-label="Основные каналы связи">
+  <div class="container top-social__inner">
+    <div class="top-social__summary">
+      <div class="top-social__contacts">
+        <a
+          class="top-social__contact"
+          href={phoneHref}
+          data-speech-label={`Позвонить по номеру ${contacts.phone}`}
+        >
+          <img
+            class="top-social__contact-icon"
+            src="/images/social/phone.webp"
+            alt=""
+            width="24"
+            height="24"
+            loading="lazy"
+          />
+          <span>{contacts.phone}</span>
+        </a>
+        <a
+          class="top-social__contact"
+          href={emailHref}
+          data-speech-label={`Написать на электронную почту ${contacts.email}`}
+        >
+          <img
+            class="top-social__contact-icon"
+            src="/images/social/email.webp"
+            alt=""
+            width="24"
+            height="24"
+            loading="lazy"
+          />
+          <span>{contacts.email}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="top-social__channels">
+      {
+        socialChannels.map((channel) => {
+          const content = (
+            <>
+              <span class="top-social__icon-shell" aria-hidden="true">
+                <img
+                  class="top-social__icon"
+                  src={channel.icon}
+                  alt={channel.label}
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+              </span>
+            </>
+          );
+
+          return channel.href ? (
+            <a
+              class="top-social__item"
+              href={channel.href}
+              target="_blank"
+              rel="noreferrer"
+              data-speech-label={channel.speechLabel ?? channel.label}
+            >
+              {content}
+            </a>
+          ) : (
+            <div class="top-social__item top-social__item--static" aria-label={`Канал ${channel.label}`}>
+              {content}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

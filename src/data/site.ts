@@ -25,6 +25,35 @@ export const contacts = {
   messengers: ["WhatsApp", "Telegram"],
 } as const;
 
+export const socialChannels = [
+  {
+    label: "WhatsApp",
+    icon: "/images/social/whatsapp.webp",
+    href: "https://chat.whatsapp.com/LURMO1s5Bex7LpVhWx6WDV?mode=hqctswi",
+    speechLabel: "Открыть WhatsApp автошколы",
+  },
+  {
+    label: "Telegram",
+    icon: "/images/social/telegram.webp",
+  },
+  {
+    label: "MAX",
+    icon: "/images/social/max.webp",
+    href: "https://max.ru/u/f9LHodD0cOLlieLN7dd8FdiNmNc1IhRpo5Ab51SwfTN2AtTbKRczo2Ten2k",
+    speechLabel: "Открыть MAX автошколы",
+  },
+  {
+    label: "VK",
+    icon: "/images/social/vkontakte.webp",
+    href: "https://vk.ru/id1117605949",
+    speechLabel: "Открыть VK автошколы",
+  },
+  {
+    label: "RUTUBE",
+    icon: "/images/social/rutube.webp",
+  },
+] as const;
+
 export const trustFacts = [
   "Подготовка внимательных и аккуратных водителей категории B",
   "Сопровождение ученика до сдачи экзамена в ГИБДД",

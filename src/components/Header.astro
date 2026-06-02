@@ -1,5 +1,8 @@
 ---
-import { navigation, siteMeta } from "../data/site";
+import { contacts, navigation, siteMeta, socialChannels } from "../data/site";
+
+const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
+const emailHref = `mailto:${contacts.email}`;
 ---
 
 <header class="site-header">
@@ -17,6 +20,48 @@ import { navigation, siteMeta } from "../data/site";
         <small>Автошкола категории B</small>
       </span>
     </a>
+
+    <div class="site-header__meta" aria-label="Быстрые контакты">
+      <div class="site-header__meta-contacts">
+        <a
+          class="site-header__meta-contact"
+          href={phoneHref}
+          data-speech-label={`Позвонить по номеру ${contacts.phone}`}
+        >
+          <img src="/images/social/phone.webp" alt="" width="18" height="18" loading="lazy" />
+          <span>{contacts.phone}</span>
+        </a>
+        <a
+          class="site-header__meta-contact"
+          href={emailHref}
+          data-speech-label={`Написать на электронную почту ${contacts.email}`}
+        >
+          <img src="/images/social/email.webp" alt="" width="18" height="18" loading="lazy" />
+          <span>{contacts.email}</span>
+        </a>
+      </div>
+      <div class="site-header__meta-socials">
+        {
+          socialChannels.map((channel) =>
+            channel.href ? (
+              <a
+                class="site-header__meta-social"
+                href={channel.href}
+                target="_blank"
+                rel="noreferrer"
+                data-speech-label={channel.speechLabel ?? channel.label}
+              >
+                <img src={channel.icon} alt={channel.label} width="28" height="28" loading="lazy" />
+              </a>
+            ) : (
+              <div class="site-header__meta-social site-header__meta-social--static" aria-label={`Канал ${channel.label}`}>
+                <img src={channel.icon} alt={channel.label} width="28" height="28" loading="lazy" />
+              </div>
+            ),
+          )
+        }
+      </div>
+    </div>
 
     <button
       class="site-header__menu-toggle"
