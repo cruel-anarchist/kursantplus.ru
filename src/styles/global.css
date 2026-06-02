@@ -208,7 +208,7 @@ code {
 
 .section-heading h2,
 .legal-hero h1,
-.hero h1 {
+.hero h2 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
@@ -653,7 +653,7 @@ code {
   gap: 1.4rem;
 }
 
-.hero h1 {
+.hero h2 {
   font-size: clamp(2.8rem, 2rem + 3vw, 5.25rem);
   line-height: 1.02;
 }
@@ -664,6 +664,15 @@ code {
   color: var(--color-muted);
   font-size: 1.12rem;
   line-height: 1.75;
+}
+
+.hero__location {
+  max-width: 32rem;
+  margin: -0.35rem 0 0;
+  color: var(--color-ink-900);
+  font-size: clamp(1.35rem, 1.05rem + 1.3vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .hero__actions {
@@ -3619,6 +3628,7 @@ body[data-vision-mode="accessible"] .accessible-panel button {
 body[data-vision-mode="accessible"] .hero__trust li,
 body[data-vision-mode="accessible"] .hero__stats dd,
 body[data-vision-mode="accessible"] .hero__stats dt,
+body[data-vision-mode="accessible"] .hero__location,
 body[data-vision-mode="accessible"] .hero__text,
 body[data-vision-mode="accessible"] .legal-row__label,
 body[data-vision-mode="accessible"] .legal-row__value,
@@ -3690,6 +3700,7 @@ body[data-vision-mode="accessible"][data-vision-contrast="dark"] .site-footer a,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .hero__trust li,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .hero__stats dd,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .hero__stats dt,
+body[data-vision-mode="accessible"][data-vision-contrast="dark"] .hero__location,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .hero__text,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .legal-row__label,
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .legal-row__value,
