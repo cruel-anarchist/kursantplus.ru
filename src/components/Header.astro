@@ -1,0 +1,46 @@
+---
+import { navigation, siteMeta } from "../data/site";
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/">
+      <img
+        src="/images/brand/logo-emblem-256.webp"
+        alt={`Эмблема ${siteMeta.shortName}`}
+        width="60"
+        height="60"
+        loading="eager"
+      />
+      <span class="brand__text">
+        <strong>{siteMeta.shortName}</strong>
+        <small>Автошкола категории B</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Основная навигация">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            data-speech-label={item.speechLabel ?? item.label}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="site-header__actions">
+      <button
+        class="site-header__vision-toggle"
+        type="button"
+        data-vision-toggle
+        aria-pressed="false"
+      >
+        Версия для слабовидящих
+      </button>
+      <a class="site-header__cta" href="#contacts">Записаться</a>
+    </div>
+  </div>
+</header>

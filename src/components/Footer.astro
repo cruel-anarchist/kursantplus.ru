@@ -1,0 +1,63 @@
+---
+import { contacts, navigation, siteMeta } from "../data/site";
+
+const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
+const emailHref = `mailto:${contacts.email}`;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <img
+        src="/images/brand/logo-emblem-256.webp"
+        alt={`Эмблема ${siteMeta.shortName}`}
+        width="74"
+        height="74"
+        loading="lazy"
+      />
+      <div>
+        <strong>{siteMeta.name}</strong>
+        <p>
+          Автошкола категории B в Москве: обучение на МКПП и АКПП,
+          сопровождение до экзамена в ГИБДД и дополнительные занятия для
+          уверенного вождения.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h3>Разделы</h3>
+      <ul class="site-footer__list">
+        {
+          navigation.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="site-footer__contacts">
+      <h3>Контакты</h3>
+      <div class="site-footer__details">
+        <div class="site-footer__detail">
+          <span>Телефон</span>
+          <strong><a href={phoneHref}>{contacts.phone}</a></strong>
+        </div>
+        <div class="site-footer__detail">
+          <span>Email</span>
+          <strong><a href={emailHref}>{contacts.email}</a></strong>
+        </div>
+        <div class="site-footer__detail">
+          <span>Адрес</span>
+          <strong>{contacts.address}</strong>
+        </div>
+      </div>
+      <div class="site-footer__schedule">
+        <span>График работы</span>
+        <strong>{contacts.schedule.hours}</strong>
+        <p>{contacts.schedule.workdays}</p>
+        <p>{contacts.schedule.weekends} — {contacts.schedule.note}</p>
+      </div>
+    </div>
+  </div>
+</footer>

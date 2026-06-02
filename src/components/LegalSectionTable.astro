@@ -1,0 +1,25 @@
+---
+import type { LegalSection } from "../data/legal";
+
+type Props = {
+  section: LegalSection;
+};
+
+const { section } = Astro.props;
+---
+
+<section class="legal-section" id={section.id}>
+  <div class="legal-section__title">
+    <h2>{section.title}</h2>
+  </div>
+  <div class="legal-section__table" role="table" aria-label={section.title}>
+    {
+      section.rows.map((row) => (
+        <div class="legal-row" role="row">
+          <div class="legal-row__label" role="cell">{row.label}</div>
+          <div class="legal-row__value" role="cell">{row.value}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>

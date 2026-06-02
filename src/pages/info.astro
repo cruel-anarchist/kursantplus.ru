@@ -1,0 +1,57 @@
+---
+import LegalSectionTable from "../components/LegalSectionTable.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { documentsFolder, legalSections } from "../data/legal";
+---
+
+<BaseLayout
+  title="Сведения об образовательной организации | Курсант +"
+  description="Официальный раздел сайта автошколы Курсант + со структурой и блоками по техническому заданию."
+  noindex={true}
+>
+  <section class="legal-hero">
+    <div class="container legal-hero__grid">
+      <div>
+        <p class="section-heading__eyebrow">Официальный раздел</p>
+        <h1>Сведения об образовательной организации</h1>
+        <p>
+          Страница подготовлена по структуре технического задания. Недостающие
+          данные отмечены как ожидающие заполнения, чтобы их можно было
+          подставлять без переделки шаблона.
+        </p>
+      </div>
+
+      <aside class="legal-hero__aside">
+        <h2>Каталог документов</h2>
+        <p>
+          Для загрузки уставов, лицензий, локальных актов и сканов подготовлен
+          отдельный публичный каталог: <code>{documentsFolder}</code>.
+        </p>
+        <div class="legal-hero__status">
+          <span>Статус наполнения</span>
+          <strong>Шаблон страницы готов, ожидается передача официальных данных</strong>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="legal-nav">
+    <div class="container legal-nav__list">
+      {
+        legalSections.map((section) => (
+          <a href={`#${section.id}`}>{section.title}</a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-stack">
+      {
+        legalSections.map((section) => (
+          <LegalSectionTable section={section} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

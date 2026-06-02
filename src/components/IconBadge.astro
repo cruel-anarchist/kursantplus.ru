@@ -1,0 +1,27 @@
+---
+type Props = {
+  title: string;
+  text: string;
+  icon?: string;
+  variant?: "light" | "dark";
+  className?: string;
+};
+
+const { title, text, icon, variant = "light", className } = Astro.props;
+---
+
+<article
+  class:list={["info-badge", `info-badge--${variant}`, className]}
+  data-parallax
+  data-parallax-speed={variant === "dark" ? "18" : "20"}
+>
+  {
+    icon && (
+      <div class="info-badge__icon-shell" aria-hidden="true">
+        <img class="info-badge__icon" src={icon} alt="" width="40" height="40" />
+      </div>
+    )
+  }
+  <h3>{title}</h3>
+  <p>{text}</p>
+</article>

@@ -1,0 +1,518 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { contacts, siteMeta } from "../data/site";
+import "../styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+};
+
+const {
+  title = siteMeta.name,
+  description = siteMeta.description,
+  image = "/images/hero/hero-driving-school-main.webp",
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? Astro.url;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const socialImageUrl = new URL(image, siteUrl);
+const siteRootUrl = new URL("/", siteUrl);
+const websiteId = new URL("/#website", siteUrl).toString();
+const organizationId = new URL("/#organization", siteUrl).toString();
+const pageId = `${canonicalUrl.toString()}#webpage`;
+const robotsContent = noindex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large";
+
+const normalizedPhone = contacts.phone.replace(/[^\d+]/g, "");
+const knownEmail =
+  contacts.email && contacts.email.toLowerCase() !== "уточняется"
+    ? contacts.email
+    : undefined;
+const addressParts = contacts.address
+  .split(",")
+  .map((part) => part.trim())
+  .filter(Boolean);
+const streetAddress = addressParts.length > 1 ? addressParts.slice(1).join(", ") : undefined;
+const addressLocality = addressParts[0]?.replace(/^г\.\s*/i, "").trim() || siteMeta.city;
+
+const openingHoursSpecification = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "https://schema.org/Tuesday",
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+      "https://schema.org/Saturday",
+    ],
+    opens: "11:00",
+    closes: "20:00",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: siteMeta.name,
+      description: siteMeta.description,
+      url: siteRootUrl.toString(),
+      inLanguage: "ru-RU",
+      publisher: {
+        "@id": organizationId,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": pageId,
+      url: canonicalUrl.toString(),
+      name: title,
+      description,
+      inLanguage: "ru-RU",
+      isPartOf: {
+        "@id": websiteId,
+      },
+      about: {
+        "@id": organizationId,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: socialImageUrl.toString(),
+      },
+    },
+    {
+      "@type": ["EducationalOrganization", "LocalBusiness"],
+      "@id": organizationId,
+      name: siteMeta.name,
+      alternateName: siteMeta.shortName,
+      description: siteMeta.description,
+      url: siteRootUrl.toString(),
+      image: socialImageUrl.toString(),
+      logo: {
+        "@type": "ImageObject",
+        url: new URL("/images/brand/logo-emblem-256.webp", siteUrl).toString(),
+      },
+      telephone: normalizedPhone,
+      ...(knownEmail ? { email: knownEmail } : {}),
+      address: {
+        "@type": "PostalAddress",
+        addressLocality,
+        addressRegion: siteMeta.city,
+        addressCountry: "RU",
+        ...(streetAddress ? { streetAddress } : {}),
+      },
+      areaServed: {
+        "@type": "City",
+        name: siteMeta.city,
+      },
+      publicAccess: true,
+      currenciesAccepted: "RUB",
+      priceRange: `${siteMeta.priceFrom} - ${siteMeta.priceTo}`,
+      openingHours: "Tu-Sa 11:00-20:00",
+      openingHoursSpecification,
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: normalizedPhone,
+        areaServed: "RU-MOW",
+        availableLanguage: ["ru"],
+        hoursAvailable: openingHoursSpecification,
+      },
+      sameAs: [siteRootUrl.toString()],
+      mainEntityOfPage: {
+        "@id": pageId,
+      },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={siteMeta.themeColor} />
+    <link rel="canonical" href={canonicalUrl.toString()} />
+    <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteMeta.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.toString()} />
+    <meta property="og:image" content={socialImageUrl.toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl.toString()} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к контенту</a>
+    <div class="accessible-panel" data-accessible-panel hidden>
+      <div class="container accessible-panel__inner">
+        <div class="accessible-panel__group">
+          <span class="accessible-panel__label">Версия для слабовидящих</span>
+          <button type="button" data-vision-close>Обычная версия</button>
+        </div>
+        <div class="accessible-panel__group">
+          <span class="accessible-panel__label">Размер шрифта</span>
+          <button type="button" data-font-size="16" aria-pressed="false">A</button>
+          <button type="button" data-font-size="20" aria-pressed="false">A+</button>
+          <button type="button" data-font-size="24" aria-pressed="false">A++</button>
+        </div>
+        <div class="accessible-panel__group">
+          <span class="accessible-panel__label">Контраст</span>
+          <button type="button" data-contrast="light" aria-pressed="false">Светлый</button>
+          <button type="button" data-contrast="dark" aria-pressed="false">Тёмный</button>
+        </div>
+      </div>
+    </div>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline>
+      const storageKey = "kursant-plus-vision-mode";
+      const fontStorageKey = "kursant-plus-vision-font-size";
+      const contrastStorageKey = "kursant-plus-vision-contrast";
+      const navigationSpeechKey = "kursant-plus-navigation-speech";
+      const body = document.body;
+      const visionButton = document.querySelector("[data-vision-toggle]");
+      const accessiblePanel = document.querySelector("[data-accessible-panel]");
+      const closeButton = document.querySelector("[data-vision-close]");
+      const fontButtons = document.querySelectorAll("[data-font-size]");
+      const contrastButtons = document.querySelectorAll("[data-contrast]");
+      let lastAnnouncement = "";
+      let lastAnnouncementAt = 0;
+      let availableVoices = [];
+
+      const preferredVoiceMatchers = [
+        /pavel/i,
+        /irina/i,
+        /ekaterina/i,
+        /microsoft.*ru/i,
+        /desktop/i,
+        /natural/i,
+      ];
+
+      const loadVoices = () => {
+        if (!("speechSynthesis" in window)) return;
+        availableVoices = window.speechSynthesis.getVoices();
+      };
+
+      const getPreferredRussianVoice = () => {
+        if (!availableVoices.length) return null;
+
+        const russianVoices = availableVoices.filter((voice) =>
+          voice.lang?.toLowerCase().startsWith("ru"),
+        );
+
+        if (!russianVoices.length) return null;
+
+        for (const matcher of preferredVoiceMatchers) {
+          const matched = russianVoices.find((voice) => matcher.test(voice.name));
+          if (matched) return matched;
+        }
+
+        return russianVoices[0];
+      };
+
+      const speakMessage = (message) => {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.lang = "ru-RU";
+        utterance.rate = 0.96;
+        utterance.pitch = 1;
+        const preferredVoice = getPreferredRussianVoice();
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+          utterance.lang = preferredVoice.lang || "ru-RU";
+        }
+        window.speechSynthesis.speak(utterance);
+      };
+
+      const announceControlText = (text) => {
+        const message = text?.replace(/\s+/g, " ").trim();
+        if (!message) return;
+        const now = Date.now();
+        if (lastAnnouncement === message && now - lastAnnouncementAt < 350) return;
+
+        lastAnnouncement = message;
+        lastAnnouncementAt = now;
+        speakMessage(message);
+      };
+
+      const updateChoiceState = (elements, predicate) => {
+        elements.forEach((element) => {
+          const active = predicate(element);
+          element.classList.toggle("is-active", active);
+          element.setAttribute("aria-pressed", String(active));
+        });
+      };
+
+      const applyVisionMode = (enabled, announce = false) => {
+        body.dataset.visionMode = enabled ? "accessible" : "default";
+        visionButton?.setAttribute("aria-pressed", String(enabled));
+        accessiblePanel?.toggleAttribute("hidden", !enabled);
+        if (visionButton) {
+          visionButton.textContent = enabled
+            ? "Обычная версия сайта"
+            : "Версия для слабовидящих";
+        }
+        if (announce) {
+          speakMessage(
+            enabled
+              ? "Включена версия сайта для слабови́дящих"
+              : "Включена обычная версия сайта",
+          );
+        }
+        window.updateParallaxScene?.();
+      };
+
+      const applyFontSize = (size) => {
+        body.style.setProperty("--accessible-font-size", `${size}px`);
+        updateChoiceState(
+          fontButtons,
+          (button) => button.dataset.fontSize === String(size),
+        );
+        window.updateParallaxScene?.();
+      };
+
+      const applyContrast = (contrast) => {
+        body.dataset.visionContrast = contrast;
+        updateChoiceState(
+          contrastButtons,
+          (button) => button.dataset.contrast === contrast,
+        );
+      };
+
+      const savedMode = window.localStorage.getItem(storageKey) === "accessible";
+      const savedFontSize = window.localStorage.getItem(fontStorageKey) || "16";
+      const savedContrast = window.localStorage.getItem(contrastStorageKey) || "light";
+
+      loadVoices();
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+      }
+
+      applyVisionMode(savedMode);
+      applyFontSize(savedFontSize);
+      applyContrast(savedContrast);
+
+      if (savedMode) {
+        const pendingNavigationSpeech = window.sessionStorage.getItem(navigationSpeechKey);
+        if (pendingNavigationSpeech) {
+          window.sessionStorage.removeItem(navigationSpeechKey);
+          window.setTimeout(() => {
+            speakMessage(pendingNavigationSpeech);
+          }, 180);
+        }
+      }
+
+      visionButton?.addEventListener("click", () => {
+        const enabled = body.dataset.visionMode !== "accessible";
+        applyVisionMode(enabled, true);
+        window.localStorage.setItem(
+          storageKey,
+          enabled ? "accessible" : "default",
+        );
+      });
+
+      closeButton?.addEventListener("click", () => {
+        applyVisionMode(false, true);
+        window.localStorage.setItem(storageKey, "default");
+      });
+
+      fontButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.fontSize || "20";
+          applyFontSize(size);
+          window.localStorage.setItem(fontStorageKey, size);
+        });
+      });
+
+      contrastButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const contrast = button.dataset.contrast || "light";
+          applyContrast(contrast);
+          window.localStorage.setItem(contrastStorageKey, contrast);
+        });
+      });
+
+      const handleControlAnnouncement = (event) => {
+        if (body.dataset.visionMode !== "accessible") return;
+        const target = event.target instanceof Element ? event.target.closest("a, button, [role='button']") : null;
+        if (!target) return;
+        if (
+          target.hasAttribute("data-vision-toggle") ||
+          target.hasAttribute("data-vision-close") ||
+          target.hasAttribute("data-font-size") ||
+          target.hasAttribute("data-contrast")
+        ) {
+          return;
+        }
+
+        const label =
+          target.getAttribute("data-speech-label") ||
+          target.getAttribute("aria-label") ||
+          target.getAttribute("title") ||
+          target.textContent;
+
+        announceControlText(label || "");
+      };
+
+      document.addEventListener("pointerdown", handleControlAnnouncement);
+      document.addEventListener("click", (event) => {
+        if (body.dataset.visionMode !== "accessible") return;
+        if (!(event.target instanceof Element)) return;
+
+        const link = event.target.closest("a");
+        if (!link) return;
+        if (
+          link.hasAttribute("download") ||
+          link.target === "_blank" ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        ) {
+          return;
+        }
+
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+          return;
+        }
+
+        const url = new URL(link.href, window.location.href);
+        if (url.origin !== window.location.origin) return;
+
+        const label =
+          link.getAttribute("data-speech-label") ||
+          link.getAttribute("aria-label") ||
+          link.getAttribute("title") ||
+          link.textContent ||
+          "";
+
+        window.sessionStorage.setItem(
+          navigationSpeechKey,
+          label.replace(/\s+/g, " ").trim(),
+        );
+      });
+
+      document.addEventListener("focusin", (event) => {
+        if (!(event.target instanceof Element)) return;
+        const target = event.target.closest("a, button, [role='button']");
+        if (!target) return;
+        handleControlAnnouncement({ target });
+      });
+
+      const parallaxItems = Array.from(document.querySelectorAll("[data-parallax]"));
+      let parallaxFrame = 0;
+      let parallaxAnimationFrame = 0;
+      const parallaxState = new WeakMap();
+
+      const resetParallaxScene = () => {
+        parallaxItems.forEach((element) => {
+          element.style.setProperty("--parallax-offset", "0px");
+        });
+      };
+
+      const shouldDisableParallax = () => body.dataset.visionMode === "accessible";
+
+      const updateParallaxScene = () => {
+        parallaxFrame = 0;
+
+        if (!parallaxItems.length || shouldDisableParallax()) {
+          resetParallaxScene();
+          return;
+        }
+
+        const viewportHeight = window.innerHeight || 1;
+        const viewportCenter = viewportHeight / 2;
+        const viewportScale = window.innerWidth < 720 ? 0.72 : 1;
+
+        parallaxItems.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const elementCenter = rect.top + rect.height / 2;
+          const progress = (elementCenter - viewportCenter) / viewportCenter;
+          const clampedProgress = Math.max(-1, Math.min(1, progress));
+          const strength = Number(element.getAttribute("data-parallax-speed") || 22);
+          const direction = Number(element.getAttribute("data-parallax-direction") || -1);
+          const offset = clampedProgress * strength * direction * viewportScale;
+          const previous = parallaxState.get(element) || {
+            current: 0,
+            target: 0,
+          };
+
+          parallaxState.set(element, {
+            current: previous.current,
+            target: offset,
+          });
+        });
+
+        if (!parallaxAnimationFrame) {
+          parallaxAnimationFrame = window.requestAnimationFrame(animateParallaxScene);
+        }
+      };
+
+      const animateParallaxScene = () => {
+        parallaxAnimationFrame = 0;
+
+        if (!parallaxItems.length || shouldDisableParallax()) {
+          resetParallaxScene();
+          return;
+        }
+
+        let shouldContinue = false;
+
+        parallaxItems.forEach((element) => {
+          const state = parallaxState.get(element) || { current: 0, target: 0 };
+          const next = state.current + (state.target - state.current) * 0.14;
+
+          element.style.setProperty("--parallax-offset", `${next.toFixed(2)}px`);
+          parallaxState.set(element, {
+            current: next,
+            target: state.target,
+          });
+
+          if (Math.abs(state.target - next) > 0.18) {
+            shouldContinue = true;
+          }
+        });
+
+        if (shouldContinue) {
+          parallaxAnimationFrame = window.requestAnimationFrame(animateParallaxScene);
+        }
+      };
+
+      const queueParallaxScene = () => {
+        if (parallaxFrame) return;
+        parallaxFrame = window.requestAnimationFrame(updateParallaxScene);
+      };
+
+      window.updateParallaxScene = queueParallaxScene;
+      window.addEventListener("scroll", queueParallaxScene, { passive: true });
+      window.addEventListener("resize", queueParallaxScene);
+      window.addEventListener("load", queueParallaxScene);
+      queueParallaxScene();
+    </script>
+  </body>
+</html>

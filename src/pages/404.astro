@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Страница не найдена | Курсант +"
+  description="Запрошенная страница не найдена. Вернитесь на главную страницу сайта автошколы Курсант +."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container">
+      <div class="official-callout">
+        <div>
+          <p class="section-heading__eyebrow">Ошибка 404</p>
+          <h1>Страница не найдена</h1>
+          <p>
+            Возможно, ссылка устарела или адрес был введён с ошибкой. Вернитесь
+            на главную страницу и продолжите просмотр сайта.
+          </p>
+        </div>
+        <div class="official-callout__actions">
+          <a class="button button--primary" href="/">Перейти на главную</a>
+          <p>Если ошибка повторяется, проверьте адрес страницы или используйте меню сайта.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

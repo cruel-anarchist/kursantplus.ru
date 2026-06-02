@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const styleDirections = [
+  {
+    id: "a",
+    name: "A. Эмблемный металл",
+    text: "Тёмное ядро, золото, красный акцент. Самый статусный и близкий к знаку.",
+    modifier: "metal",
+  },
+  {
+    id: "b",
+    name: "B. Белая эмаль",
+    text: "Светлая эмалевая подложка, чистый контур, спокойная премиальная подача.",
+    modifier: "enamel",
+  },
+  {
+    id: "c",
+    name: "C. Академический жетон",
+    text: "Более строгий прямоугольный ритм, отсылка к нашивкам и погонам.",
+    modifier: "patch",
+  },
+  {
+    id: "d",
+    name: "D. Печатный знак",
+    text: "Минималистичный вариант: меньше декоративности, больше уверенной графики.",
+    modifier: "stamp",
+  },
+  {
+    id: "e",
+    name: "E. Навигационный",
+    text: "Современнее и прикладнее для сайта, но всё ещё в фирменной палитре.",
+    modifier: "route",
+  },
+  {
+    id: "f",
+    name: "F. Люкс-госзнак",
+    text: "Объёмнее и богаче, но без тяжёлого дешёвого 3D. Самый парадный вариант.",
+    modifier: "insignia",
+  },
+] as const;
+
+const sampleIcons = [
+  { icon: "/icons/shield.svg", label: "Официальный подход" },
+  { icon: "/icons/wheel.svg", label: "Практика" },
+  { icon: "/icons/document.svg", label: "Документы" },
+] as const;
+---
+
+<BaseLayout
+  title="Варианты иконок — Курсант +"
+  description="Сравнение фирменных направлений для иконок и подложек сайта Курсант +."
+  noindex={true}
+>
+  <section class="section section--band">
+    <div class="container icon-lab">
+      <div class="icon-lab__hero">
+        <p class="section-heading__eyebrow">Сравнение направлений</p>
+        <h1>Визуальные варианты фирменных иконок</h1>
+        <p>
+          Здесь собраны 6 разных направлений для системы `иконка + подложка`.
+          Все варианты сделаны на нашей палитре `синий / золото / красный`, но
+          отличаются характером. Выбираем один и уже под него переделываем весь сайт.
+        </p>
+      </div>
+
+      <div class="icon-lab__grid">
+        {
+          styleDirections.map((style) => (
+            <article class="icon-lab-card">
+              <div class="icon-lab-card__head">
+                <h2>{style.name}</h2>
+                <p>{style.text}</p>
+              </div>
+
+              <div class="icon-lab-card__examples">
+                {
+                  sampleIcons.map((sample) => (
+                    <div class="icon-lab-sample">
+                      <div class:list={["icon-lab-badge", `icon-lab-badge--${style.modifier}`]}>
+                        <img src={sample.icon} alt="" width="44" height="44" />
+                      </div>
+                      <span>{sample.label}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

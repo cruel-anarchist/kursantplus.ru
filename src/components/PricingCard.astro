@@ -1,0 +1,28 @@
+---
+type Props = {
+  name: string;
+  price: string;
+  summary: string;
+  features: readonly string[];
+  accent?: string;
+};
+
+const { name, price, summary, features, accent = "gold" } = Astro.props;
+---
+
+<article
+  class:list={["pricing-card", `pricing-card--${accent}`]}
+  data-parallax
+  data-parallax-speed="24"
+>
+  <div class="pricing-card__head">
+    <h3>{name}</h3>
+    <strong>{price}</strong>
+  </div>
+  <p>{summary}</p>
+  <ul>
+    {
+      features.map((item) => <li>{item}</li>)
+    }
+  </ul>
+</article>

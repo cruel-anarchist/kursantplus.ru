@@ -1,0 +1,22 @@
+---
+type Props = {
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: readonly string[];
+};
+
+const { title, subtitle, description, highlights } = Astro.props;
+---
+
+<article class="program-card" data-parallax data-parallax-speed="22">
+  <div class="program-card__crest" aria-hidden="true"></div>
+  <p class="program-card__subtitle">{subtitle}</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul>
+    {
+      highlights.map((item) => <li>{item}</li>)
+    }
+  </ul>
+</article>
