@@ -24,7 +24,7 @@ const emailHref = `mailto:${contacts.email}`;
     <div class="site-header__meta" aria-label="Быстрые контакты">
       <div class="site-header__meta-contacts">
         <a
-          class="site-header__meta-contact"
+          class="site-header__meta-contact site-header__meta-contact--phone"
           href={phoneHref}
           data-speech-label={`Позвонить по номеру ${contacts.phone}`}
         >
@@ -32,7 +32,7 @@ const emailHref = `mailto:${contacts.email}`;
           <span>{contacts.phone}</span>
         </a>
         <a
-          class="site-header__meta-contact"
+          class="site-header__meta-contact site-header__meta-contact--email"
           href={emailHref}
           data-speech-label={`Написать на электронную почту ${contacts.email}`}
         >
@@ -41,6 +41,13 @@ const emailHref = `mailto:${contacts.email}`;
         </a>
       </div>
       <div class="site-header__meta-socials">
+        <a
+          class="site-header__meta-social site-header__meta-social--email"
+          href={emailHref}
+          data-speech-label={`Написать на электронную почту ${contacts.email}`}
+        >
+          <img src="/images/social/email.webp" alt="Email" width="28" height="28" loading="lazy" />
+        </a>
         {
           socialChannels.map((channel) =>
             channel.href ? (

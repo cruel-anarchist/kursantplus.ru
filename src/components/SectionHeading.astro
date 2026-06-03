@@ -2,7 +2,7 @@
 type Props = {
   id?: string;
   title: string;
-  text: string;
+  text?: string;
   align?: "left" | "center";
 };
 
@@ -11,5 +11,5 @@ const { id, title, text, align = "left" } = Astro.props;
 
 <div class:list={["section-heading", `section-heading--${align}`]} id={id}>
   <h2>{title}</h2>
-  <p>{text}</p>
+  {text && <p>{text}</p>}
 </div>
