@@ -56,7 +56,7 @@ const emailHref = `mailto:${contacts.email}`;
           </div>
           <div data-parallax data-parallax-speed="26">
             <dt>Срок обучения</dt>
-            <dd>2-2,5 месяца</dd>
+            <dd>2,5 - 3,5 месяца</dd>
           </div>
           <div data-parallax data-parallax-speed="30">
             <dt>Стоимость</dt>
@@ -79,11 +79,11 @@ const emailHref = `mailto:${contacts.email}`;
       />
       <div class="programs-intro">
         <div class="programs-intro__card" data-parallax data-parallax-speed="18">
-          <strong>Один фокус, две траектории, три тарифа</strong>
+          <strong>Один фокус, две траектории, четыре тарифа</strong>
         </div>
         <p>
           Программы собраны так, чтобы выбор был понятным с первого взгляда:
-          категория B, два формата коробки передач и три уровня подготовки под
+          категория B, два формата коробки передач и четыре уровня подготовки под
           разный запрос, темп обучения, желаемый объём практики и уверенный
           выход к самостоятельному вождению.
         </p>
@@ -101,14 +101,14 @@ const emailHref = `mailto:${contacts.email}`;
   <section class="section" id="pricing">
     <div class="container">
       <SectionHeading
-        title="Три формата подготовки"
+        title="Четыре формата подготовки"
       />
       <div class="pricing-intro">
         <div class="pricing-intro__note">
           <p>
             Каждый тариф отличается объёмом практики, темпом обучения и уровнем
-            сопровождения: от базового курса для уверенного старта до
-            расширенного формата с дополнительной практикой.
+            сопровождения: от ускоренного формата для тех, кто уже водит, до
+            расширенного курса с максимальным объёмом практики.
           </p>
         </div>
         <div class="pricing-intro__includes">
@@ -120,7 +120,7 @@ const emailHref = `mailto:${contacts.email}`;
           </ul>
         </div>
       </div>
-      <div class="grid grid--three">
+      <div class="grid pricing-grid">
         {
           pricingPlans.map((plan) => (
             <PricingCard {...plan} />
@@ -407,7 +407,7 @@ const emailHref = `mailto:${contacts.email}`;
         <summary class="timeline-reveal__summary services-reveal__summary">
           <div class="timeline-reveal__copy">
             <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Выберите дополнительный формат: от пробного урока до ускоренного курса и спецподготовки</h3>
+            <h3>Выберите дополнительный формат: от пробного урока до спецподготовки и отдельных практических занятий</h3>
             <p>
               Внутри собраны дополнительные услуги, отдельные практические
               форматы и поддержка, которую можно подключить до, во время и после
@@ -415,9 +415,9 @@ const emailHref = `mailto:${contacts.email}`;
             </p>
             <div class="services-reveal__focus">
               <div class="services-reveal__focus-card">
-                <span>Ускоренный курс</span>
-                <strong>65 000 ₽</strong>
-                <p>МКПП или АКПП • теория очно/онлайн • 2,5-3 месяца</p>
+                <span>Пробный урок</span>
+                <strong>5 000 ₽</strong>
+                <p>3 часа знакомства с практикой • мягкий вход в обучение</p>
               </div>
               <div class="services-reveal__focus-card">
                 <span>Иностранным гражданам</span>
@@ -428,7 +428,7 @@ const emailHref = `mailto:${contacts.email}`;
           </div>
           <div class="timeline-reveal__meta services-reveal__meta">
             <strong>{extraServicesCatalog.length} услуг</strong>
-            <p>Пробный урок, ускоренный формат, спецкурсы и дополнительная поддержка</p>
+            <p>Пробный урок, спецкурсы, отдельная практика и дополнительная поддержка</p>
             <span class="timeline-reveal__action">
               <span class="timeline-reveal__action-open">Открыть услуги</span>
               <span class="timeline-reveal__action-close">Скрыть услуги</span>

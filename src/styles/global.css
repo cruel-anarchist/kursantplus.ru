@@ -794,6 +794,10 @@ code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.pricing-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .programs-intro {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1094,6 +1098,12 @@ code {
 .pricing-card--bronze {
   background:
     linear-gradient(145deg, rgba(212, 166, 58, 0.14), rgba(255, 255, 255, 0.94)),
+    var(--color-white);
+}
+
+.pricing-card--crimson {
+  background:
+    linear-gradient(145deg, rgba(179, 32, 37, 0.12), rgba(255, 255, 255, 0.96)),
     var(--color-white);
 }
 
@@ -3184,6 +3194,7 @@ code {
   }
 
   .grid--three,
+  .pricing-grid,
   .service-cards,
   .finance-grid,
   .fleet-grid {
@@ -3813,7 +3824,8 @@ code {
   }
 
   .grid--two,
-  .grid--three {
+  .grid--three,
+  .pricing-grid {
     grid-template-columns: 1fr;
   }
 
@@ -4519,6 +4531,7 @@ body[data-vision-mode="accessible"] .timeline__aside-badge strong {
 }
 
 body[data-vision-mode="accessible"] .grid--three,
+body[data-vision-mode="accessible"] .pricing-grid,
 body[data-vision-mode="accessible"] .grid--two,
 body[data-vision-mode="accessible"] .service-cards,
 body[data-vision-mode="accessible"] .finance-grid,
