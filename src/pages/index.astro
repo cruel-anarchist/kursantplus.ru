@@ -398,97 +398,183 @@ const emailHref = `mailto:${contacts.email}`;
     </div>
   </section>
 
-  <section class="section section--after-timeline">
+  <section class="section section--interactive-feature section--services-feature">
     <div class="container">
       <SectionHeading
         title="Дополнительные услуги и поддержка"
       />
-      <div class="service-cards">
-        {
-          extraServicesCatalog.map((service) => (
-            <article class="service-card" data-parallax data-parallax-speed="20">
-              <div class="service-card__head">
-                {service.tag && <span class="service-card__tag">{service.tag}</span>}
-                <h3>{service.title}</h3>
-                <p>{service.meta}</p>
+      <details class="timeline-reveal services-reveal" data-parallax data-parallax-speed="12">
+        <summary class="timeline-reveal__summary services-reveal__summary">
+          <div class="timeline-reveal__copy">
+            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
+            <h3>Выберите дополнительный формат: от пробного урока до ускоренного курса и спецподготовки</h3>
+            <p>
+              Внутри собраны дополнительные услуги, отдельные практические
+              форматы и поддержка, которую можно подключить до, во время и после
+              основного курса.
+            </p>
+            <div class="services-reveal__focus">
+              <div class="services-reveal__focus-card">
+                <span>Ускоренный курс</span>
+                <strong>65 000 ₽</strong>
+                <p>МКПП или АКПП • теория очно/онлайн • 2,5-3 месяца</p>
               </div>
-              <p>{service.text}</p>
-              <div class="service-card__footer">
-                <div class="service-card__price">{service.price}</div>
-                {service.priceNote && <small>{service.priceNote}</small>}
+              <div class="services-reveal__focus-card">
+                <span>Иностранным гражданам</span>
+                <strong>20 000 ₽</strong>
+                <p>Подготовка для получения водительского удостоверения РФ</p>
               </div>
-            </article>
-          ))
-        }
-      </div>
-      <div class="grid grid--three support-grid">
-        {
-          supportFeatures.map((item) => (
-            <IconBadge title={item.title} text={item.text} icon={item.icon} />
-          ))
-        }
-      </div>
+            </div>
+          </div>
+          <div class="timeline-reveal__meta services-reveal__meta">
+            <strong>{extraServicesCatalog.length} услуг</strong>
+            <p>Пробный урок, ускоренный формат, спецкурсы и дополнительная поддержка</p>
+            <span class="timeline-reveal__action">
+              <span class="timeline-reveal__action-open">Открыть услуги</span>
+              <span class="timeline-reveal__action-close">Скрыть услуги</span>
+            </span>
+          </div>
+        </summary>
+
+        <div class="timeline-reveal__content">
+          <div class="service-cards">
+            {
+              extraServicesCatalog.map((service) => (
+                <article class="service-card" data-parallax data-parallax-speed="20">
+                  <div class="service-card__head">
+                    {service.tag && <span class="service-card__tag">{service.tag}</span>}
+                    <h3>{service.title}</h3>
+                    <p>{service.meta}</p>
+                  </div>
+                  <p>{service.text}</p>
+                  <div class="service-card__footer">
+                    <a
+                      class="service-card__price"
+                      href="#contacts"
+                      data-service-choice={service.title}
+                      data-service-topic={service.title === "Пробный урок на автомобиле с АКПП" ? "Пробный урок" : "Запись на обучение"}
+                    >
+                      Записаться - {service.price}
+                    </a>
+                    {service.priceNote && <small>{service.priceNote}</small>}
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+          <div class="grid grid--three support-grid">
+            {
+              supportFeatures.map((item) => (
+                <IconBadge title={item.title} text={item.text} icon={item.icon} />
+              ))
+            }
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
-  <section class="section section--band">
+  <section class="section section--band section--interactive-feature section--fleet-feature">
     <div class="container fleet-section">
       <div class="fleet-section__intro">
       <SectionHeading
         title="Автопарк и маршруты подготовки"
       />
       </div>
-      <div class="fleet-section__overview">
-        <article class="fleet-section__brief" data-parallax data-parallax-speed="18">
-          <h3>Тренировочные площадки Курсант +</h3>
-          <p>
-            После теории и промежуточной подготовки практика начинается в
-            спокойной среде: на площадке ученик последовательно осваивает
-            базовые элементы вождения, привыкает к автомобилю и убирает лишнюю
-            тревожность перед выездом в город.
-          </p>
-          <p>
-            Такой этап нужен не для формальности. Он помогает заранее отработать
-            ключевые упражнения, с которыми человек столкнётся при подготовке и
-            сдаче экзамена в ГИБДД, чтобы на финальном этапе не было ощущения
-            неожиданности.
-          </p>
-          <p>
-            Практику можно выстраивать так, чтобы она органично входила в
-            обычный день: ближе к дому, работе или привычным маршрутам по
-            городу, без лишних переездов через всю Москву.
-          </p>
-        </article>
-        <aside class="fleet-section__exam-card" data-parallax data-parallax-speed="22">
-          <span>Практический этап</span>
-          <strong>Элементы, которые отрабатываются заранее</strong>
-          <ul>
-            {
-              trainingGroundElements.map((item) => <li>{item}</li>)
-            }
-          </ul>
-          <p>
-            Если хочется сначала понять, как проходит практика в Курсант +,
-            можно начать с пробного урока и спокойно оценить формат обучения.
-          </p>
-        </aside>
-      </div>
-      <div class="fleet-grid">
-        {
-          fleetCars.map((car, index) => (
-            <article class="fleet-card fleet-card--car" data-parallax data-parallax-speed="24">
-              <div class="fleet-card__media">
-                <img src={car.image} alt={car.title} loading="lazy" />
+      <details class="timeline-reveal fleet-reveal" data-parallax data-parallax-speed="12">
+        <summary class="timeline-reveal__summary fleet-reveal__summary">
+          <div class="timeline-reveal__copy">
+            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
+            <h3>Практический этап: площадка, манёвры и спокойный переход к маршрутам подготовки</h3>
+            <p>
+              Внутри собраны ключевые элементы практики: парковка, эстакада,
+              задний ход, работа с базовыми упражнениями и переход к более
+              уверенной езде в городе.
+            </p>
+          </div>
+          <div class="timeline-reveal__meta fleet-reveal__meta">
+            <strong>{trainingGroundElements.length} этапа</strong>
+            <p>Площадки, маршруты подготовки и доступ к автопарку в одном блоке</p>
+            <span class="timeline-reveal__action">
+              <span class="timeline-reveal__action-open">Открыть практику</span>
+              <span class="timeline-reveal__action-close">Скрыть практику</span>
+            </span>
+          </div>
+        </summary>
+
+        <div class="timeline-reveal__content">
+          <article class="fleet-section__brief fleet-section__brief--expanded" data-parallax data-parallax-speed="18">
+            <h3>Тренировочные площадки Курсант +</h3>
+            <p>
+              После теории и промежуточной подготовки практика начинается в
+              спокойной среде: на площадке ученик последовательно осваивает
+              базовые элементы вождения, привыкает к автомобилю и убирает лишнюю
+              тревожность перед выездом в город.
+            </p>
+            <p>
+              Такой этап нужен не для формальности. Он помогает заранее отработать
+              ключевые упражнения, с которыми человек столкнётся при подготовке и
+              сдаче экзамена в ГИБДД, чтобы на финальном этапе не было ощущения
+              неожиданности.
+            </p>
+            <p>
+              Практику можно выстраивать так, чтобы она органично входила в
+              обычный день: ближе к дому, работе или привычным маршрутам по
+              городу, без лишних переездов через всю Москву.
+            </p>
+            <div class="fleet-section__highlight">
+              <span class="fleet-section__highlight-eyebrow">Где проходит практика</span>
+              <strong>ЗАО / ЮЗАО / Новая Москва</strong>
+              <p class="fleet-section__highlight-lead">
+                Внутренние экзамены принимаются на площадке рядом с м.
+                Ново-Переделкино: Боровское шоссе, 51, стр. 1.
+              </p>
+              <p class="fleet-section__highlight-text">
+                Для практики доступны удобные точки рядом с Юго-Западной,
+                Проспектом Вернадского, Ясенево, Калужской, Профсоюзной,
+                Черемушками, Лесопарковой, Теплым Станом, Ольховой, Озерной,
+                Беляево, Варшавской, Аннино, Лобненской, а также в районах
+                Солнцево, Внуково, Рассказовка, Говорово, Саларьево,
+                Коммунарка, Марушкино, Кокошкино и Ново-Переделкино.
+              </p>
+            </div>
+            <details class="fleet-cars-toggle">
+              <summary class="fleet-cars-toggle__summary">
+                <div class="fleet-cars-toggle__copy">
+                  <span class="fleet-cars-toggle__eyebrow">Учебные автомобили</span>
+                  <strong>Ознакомьтесь с автопарком, на котором проходит практическая подготовка</strong>
+                  <p>
+                    Внутри собраны учебные автомобили категории B, на которых
+                    проходит практика и отработка маршрутов.
+                  </p>
+                </div>
+                <span class="fleet-cars-toggle__button">
+                  <span class="fleet-cars-toggle__label-open">Открыть автопарк</span>
+                  <span class="fleet-cars-toggle__label-close">Скрыть автопарк</span>
+                </span>
+              </summary>
+              <div class="fleet-cars-toggle__content">
+                <div class="fleet-grid">
+                  {
+                    fleetCars.map((car, index) => (
+                      <article class="fleet-card fleet-card--car" data-parallax data-parallax-speed="24">
+                        <div class="fleet-card__media">
+                          <img src={car.image} alt={car.title} loading="lazy" />
+                        </div>
+                        <div class="fleet-card__body">
+                          <span>{String(index + 1).padStart(2, "0")}</span>
+                          <h3>{car.title}</h3>
+                          <p>Учебный автомобиль автопарка для практической подготовки категории B.</p>
+                        </div>
+                      </article>
+                    ))
+                  }
+                </div>
               </div>
-              <div class="fleet-card__body">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{car.title}</h3>
-                <p>Учебный автомобиль автопарка для практической подготовки категории B.</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
+            </details>
+          </article>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -633,7 +719,7 @@ const emailHref = `mailto:${contacts.email}`;
 
             <label class="feedback-form__field">
               <span>Тема обращения</span>
-              <select name="topic" required>
+              <select name="topic" required data-feedback-topic>
                 <option value="Запись на обучение">Запись на обучение</option>
                 <option value="Пробный урок">Пробный урок</option>
                 <option value="Другое">Другое</option>
@@ -646,6 +732,7 @@ const emailHref = `mailto:${contacts.email}`;
                 name="message"
                 rows="5"
                 placeholder="Напишите, что хотите уточнить: формат обучения, тариф, запись, пробный урок или другой вопрос."
+                data-feedback-message
                 required
               ></textarea>
             </label>
@@ -661,6 +748,10 @@ const emailHref = `mailto:${contacts.email}`;
       const feedbackSuccessBanner = document.querySelector("[data-feedback-success]");
       const feedbackSearchParams = new URLSearchParams(window.location.search);
       const feedbackNextField = document.querySelector("[data-feedback-next]");
+      const feedbackTopicField = document.querySelector("[data-feedback-topic]");
+      const feedbackMessageField = document.querySelector("[data-feedback-message]");
+      const pricingPlanButtons = document.querySelectorAll("[data-plan-choice]");
+      const serviceChoiceButtons = document.querySelectorAll("[data-service-choice]");
 
       if (feedbackNextField instanceof HTMLInputElement) {
         feedbackNextField.value = `${window.location.origin}/?feedback=success#contacts`;
@@ -669,6 +760,39 @@ const emailHref = `mailto:${contacts.email}`;
       if (feedbackSuccessBanner && feedbackSearchParams.get("feedback") === "success") {
         feedbackSuccessBanner.hidden = false;
       }
+
+      pricingPlanButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedPlan = button.getAttribute("data-plan-choice");
+
+          if (!selectedPlan) return;
+
+          if (feedbackTopicField instanceof HTMLSelectElement) {
+            feedbackTopicField.value = "Запись на обучение";
+          }
+
+          if (feedbackMessageField instanceof HTMLTextAreaElement) {
+            feedbackMessageField.value = `Здравствуйте! Хочу записаться на тариф «${selectedPlan}».`;
+          }
+        });
+      });
+
+      serviceChoiceButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedService = button.getAttribute("data-service-choice");
+          const selectedTopic = button.getAttribute("data-service-topic");
+
+          if (!selectedService) return;
+
+          if (feedbackTopicField instanceof HTMLSelectElement && selectedTopic) {
+            feedbackTopicField.value = selectedTopic;
+          }
+
+          if (feedbackMessageField instanceof HTMLTextAreaElement) {
+            feedbackMessageField.value = `Здравствуйте! Хочу записаться на услугу «${selectedService}».`;
+          }
+        });
+      });
     </script>
   </section>
 </BaseLayout>

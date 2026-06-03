@@ -25,4 +25,13 @@ const { name, price, summary, features, accent = "gold" } = Astro.props;
       features.map((item) => <li>{item}</li>)
     }
   </ul>
+  <div class="pricing-card__footer">
+    <a
+      class="button button--primary pricing-card__button"
+      href="#contacts"
+      data-plan-choice={name}
+    >
+      Записаться
+    </a>
+  </div>
 </article>
