@@ -36,6 +36,8 @@ export const socialChannels = [
   {
     label: "Telegram",
     icon: "/images/social/telegram.webp",
+    href: "https://t.me/kursantplus",
+    speechLabel: "Открыть Telegram автошколы",
   },
   {
     label: "MAX",
@@ -52,6 +54,8 @@ export const socialChannels = [
   {
     label: "RUTUBE",
     icon: "/images/social/rutube.webp",
+    href: "https://rutube.ru/channel/78895674",
+    speechLabel: "Открыть RUTUBE автошколы",
   },
 ] as const;
 

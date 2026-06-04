@@ -5,7 +5,7 @@ const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
 const emailHref = `mailto:${contacts.email}`;
 ---
 
-<section class="top-social" aria-label="Основные каналы связи">
+<section class="top-social" aria-label="Основные каналы связи" data-top-social>
   <div class="container top-social__inner">
     <div class="top-social__summary">
       <div class="top-social__contacts">
@@ -80,3 +80,24 @@ const emailHref = `mailto:${contacts.email}`;
     </div>
   </div>
 </section>
+
+<script is:inline>
+  const topSocialStrip = document.querySelector("[data-top-social]");
+  const desktopTopSocialMedia = window.matchMedia("(min-width: 1060px)");
+
+  const syncTopSocialStrip = () => {
+    if (!(topSocialStrip instanceof HTMLElement)) return;
+
+    const shouldFade =
+      desktopTopSocialMedia.matches &&
+      document.body.dataset.visionMode !== "accessible" &&
+      window.scrollY > 80;
+
+    topSocialStrip.classList.toggle("is-faded", shouldFade);
+  };
+
+  syncTopSocialStrip();
+  window.addEventListener("scroll", syncTopSocialStrip, { passive: true });
+  window.addEventListener("resize", syncTopSocialStrip);
+  desktopTopSocialMedia.addEventListener?.("change", syncTopSocialStrip);
+</script>

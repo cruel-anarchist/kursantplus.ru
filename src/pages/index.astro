@@ -455,7 +455,14 @@ const emailHref = `mailto:${contacts.email}`;
           <div class="service-cards">
             {
               extraServicesCatalog.map((service) => (
-                <article class="service-card" data-parallax data-parallax-speed="20">
+                <article
+                  class:list={[
+                    "service-card",
+                    service.accent && "service-card--accent",
+                  ]}
+                  data-parallax
+                  data-parallax-speed="20"
+                >
                   <div class="service-card__head">
                     {service.tag && <span class="service-card__tag">{service.tag}</span>}
                     <h3>{service.title}</h3>
