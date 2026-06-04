@@ -133,26 +133,26 @@ export const trainingGroundElements = [
 export const fleetCars = [
   {
     title: "Ford Fiesta",
-    image: "/images/cars/FordFiesta.webp",
+    image: "/images/cars/FordFiesta-two.webp",
   },
   {
     title: "Kia Rio",
-    image: "/images/cars/KiaRio.webp",
+    image: "/images/cars/KiaRio-two.webp",
   },
   {
     title: "Renault Logan",
-    image: "/images/cars/RenaultLogan.webp",
+    image: "/images/cars/RenaultLogan-two.webp",
   },
   {
     title: "Lifan Smily",
-    image: "/images/cars/LifanSmily.webp",
+    image: "/images/cars/LifanSmily-two.webp",
   },
   {
     title: "LADA Granta",
-    image: "/images/cars/LadaGranta.webp",
+    image: "/images/cars/LadaGranta-two.webp",
   },
   {
     title: "Volkswagen Polo",
-    image: "/images/cars/VolksvagenPolo.webp",
+    image: "/images/cars/VolksvagenPolo-two.webp",
   },
 ] as const;

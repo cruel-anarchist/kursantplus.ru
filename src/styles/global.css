@@ -659,7 +659,7 @@ code {
   right: 0;
   bottom: -8%;
   left: 24%;
-  background: url("/images/hero/hero-driving-school-main.webp") 88% 56% / cover no-repeat;
+  background: url("/images/hero/hero-driving-school-main-two.webp") 88% 56% / cover no-repeat;
   opacity: 0.95;
   pointer-events: none;
 }
@@ -818,7 +818,7 @@ code {
   grid-column: 2;
   grid-row: 1;
   max-width: 21rem;
-  margin: 6.4rem 0 0 -2.35rem;
+  margin: 0.1rem 0 0 -2.35rem;
   padding: 0.9rem 1.35rem 1.2rem;
   overflow: hidden;
   border-radius: 32px;
@@ -3235,7 +3235,7 @@ code {
     right: 0;
     bottom: -8%;
     left: 28%;
-    background: url("/images/hero/hero-driving-school-main.webp") 90% 56% / auto 106% no-repeat;
+    background: url("/images/hero/hero-driving-school-main-two.webp") 90% 56% / auto 106% no-repeat;
   }
 
   .hero__background::before {
@@ -3339,7 +3339,7 @@ code {
     bottom: -6%;
     left: 34%;
     opacity: 0.96;
-    background: url("/images/hero/hero-driving-school-main.webp") 82% 100% / cover no-repeat;
+    background: url("/images/hero/hero-driving-school-main-two.webp") 82% 100% / cover no-repeat;
   }
 
   .hero__background::before {
@@ -4067,7 +4067,7 @@ code {
     bottom: 0;
     left: 18%;
     opacity: 0.94;
-    background: url("/images/hero/hero-driving-school-main.webp") 76% 100% / cover no-repeat;
+    background: url("/images/hero/hero-driving-school-main-two.webp") 76% 100% / cover no-repeat;
   }
 
   .hero__background::before {
@@ -4166,7 +4166,7 @@ code {
     right: -8%;
     bottom: -8%;
     left: 0;
-    background: url("/images/hero/hero-driving-school-main.webp") 74% 100% / cover no-repeat;
+    background: url("/images/hero/hero-driving-school-main-two.webp") 74% 100% / cover no-repeat;
   }
 
   .hero__background::before {
@@ -5072,3 +5072,4 @@ body[data-vision-mode="accessible"][data-vision-contrast="dark"] .top-social__su
 body[data-vision-mode="accessible"][data-vision-contrast="dark"] .top-social__contact {
   color: #ffffff !important;
 }
+

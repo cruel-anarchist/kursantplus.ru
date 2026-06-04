@@ -15,7 +15,7 @@ type Props = {
 const {
   title = siteMeta.name,
   description = siteMeta.description,
-  image = "/images/hero/hero-driving-school-main.webp",
+  image = "/images/hero/hero-driving-school-main-two.webp",
   noindex = false,
 } = Astro.props;
 
@@ -99,7 +99,7 @@ const structuredData = {
       image: socialImageUrl.toString(),
       logo: {
         "@type": "ImageObject",
-        url: new URL("/images/brand/logo-emblem-256.webp", siteUrl).toString(),
+        url: new URL("/images/brand/logo-emblem-two-256.webp", siteUrl).toString(),
       },
       telephone: normalizedPhone,
       ...(knownEmail ? { email: knownEmail } : {}),
