@@ -8,6 +8,11 @@ type Props = {
 };
 
 const { name, price, summary, features, accent = "gold" } = Astro.props;
+
+const currentPriceValue = Number(price.replace(/[^\d]/g, ""));
+const previousPrice = Number.isFinite(currentPriceValue)
+  ? `${(currentPriceValue + 3000).toLocaleString("ru-RU")} ₽`
+  : undefined;
 ---
 
 <article
@@ -17,7 +22,10 @@ const { name, price, summary, features, accent = "gold" } = Astro.props;
 >
   <div class="pricing-card__head">
     <h3>{name}</h3>
-    <strong>{price}</strong>
+    <div class="pricing-card__price">
+      {previousPrice && <span class="pricing-card__price-old">{previousPrice}</span>}
+      <strong>{price}</strong>
+    </div>
   </div>
   <p>{summary}</p>
   <ul>
