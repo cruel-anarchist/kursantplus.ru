@@ -292,7 +292,7 @@ code {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
 .brand__text {
