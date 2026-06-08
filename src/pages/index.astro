@@ -26,6 +26,7 @@ import {
 
 const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
 const emailHref = `mailto:${contacts.email}`;
+const feedbackApiUrl = "https://api.kursantplus.ru/form-handler.php";
 ---
 
 <BaseLayout
@@ -715,13 +716,12 @@ const emailHref = `mailto:${contacts.email}`;
           </div>
           <form
             class="feedback-form"
-            action={`https://formsubmit.co/${contacts.email}`}
+            action={feedbackApiUrl}
             method="POST"
+            data-feedback-form
           >
-            <input type="hidden" name="_subject" value="Новая заявка с сайта Курсант +" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="/?feedback=success#contacts" data-feedback-next />
             <input type="text" name="_honey" class="feedback-form__honey" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="page_url" value="" data-feedback-page-url />
 
             <label class="feedback-form__field">
               <span>Имя</span>
@@ -759,6 +759,14 @@ const emailHref = `mailto:${contacts.email}`;
               ></textarea>
             </label>
 
+            <label class="feedback-form__consent">
+              <input type="checkbox" name="privacy_consent" value="yes" required data-feedback-consent />
+              <span>
+                Я ознакомлен(а) с
+                <a href="/privacy" target="_blank" rel="noreferrer">политикой конфиденциальности</a>
+              </span>
+            </label>
+
             <button class="button button--primary feedback-form__submit" type="submit">
               Отправить сообщение
             </button>
@@ -769,18 +777,104 @@ const emailHref = `mailto:${contacts.email}`;
     <script is:inline>
       const feedbackSuccessBanner = document.querySelector("[data-feedback-success]");
       const feedbackSearchParams = new URLSearchParams(window.location.search);
-      const feedbackNextField = document.querySelector("[data-feedback-next]");
+      const feedbackForm = document.querySelector("[data-feedback-form]");
+      const feedbackPageUrlField = document.querySelector("[data-feedback-page-url]");
       const feedbackTopicField = document.querySelector("[data-feedback-topic]");
       const feedbackMessageField = document.querySelector("[data-feedback-message]");
+      const feedbackConsentField = document.querySelector("[data-feedback-consent]");
+      const feedbackSubmitButton = document.querySelector(".feedback-form__submit");
       const pricingPlanButtons = document.querySelectorAll("[data-plan-choice]");
       const serviceChoiceButtons = document.querySelectorAll("[data-service-choice]");
+      const feedbackSubmitLabel =
+        feedbackSubmitButton instanceof HTMLButtonElement ? feedbackSubmitButton.textContent : "";
 
-      if (feedbackNextField instanceof HTMLInputElement) {
-        feedbackNextField.value = `${window.location.origin}/?feedback=success#contacts`;
+      const syncFeedbackSubmitState = () => {
+        if (
+          feedbackConsentField instanceof HTMLInputElement &&
+          feedbackSubmitButton instanceof HTMLButtonElement
+        ) {
+          feedbackSubmitButton.disabled = !feedbackConsentField.checked;
+        }
+      };
+
+      if (feedbackPageUrlField instanceof HTMLInputElement) {
+        feedbackPageUrlField.value = window.location.href;
+      }
+
+      syncFeedbackSubmitState();
+
+      if (feedbackConsentField instanceof HTMLInputElement) {
+        feedbackConsentField.addEventListener("change", syncFeedbackSubmitState);
       }
 
       if (feedbackSuccessBanner && feedbackSearchParams.get("feedback") === "success") {
         feedbackSuccessBanner.hidden = false;
+      }
+
+      if (feedbackForm instanceof HTMLFormElement) {
+        feedbackForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (!feedbackForm.reportValidity()) {
+            return;
+          }
+
+          if (!(feedbackSubmitButton instanceof HTMLButtonElement)) {
+            feedbackForm.submit();
+            return;
+          }
+
+          feedbackSubmitButton.disabled = true;
+          feedbackSubmitButton.textContent = "Отправляем...";
+
+          const formData = new FormData(feedbackForm);
+
+          if (feedbackPageUrlField instanceof HTMLInputElement) {
+            formData.set("page_url", window.location.href);
+          }
+
+          try {
+            const response = await fetch(feedbackForm.action, {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            });
+
+            const payload = await response.json().catch(() => null);
+
+            if (!response.ok || !payload?.ok) {
+              throw new Error(
+                payload?.message ||
+                  "Не удалось отправить сообщение. Попробуйте ещё раз чуть позже."
+              );
+            }
+
+            feedbackForm.reset();
+            syncFeedbackSubmitState();
+
+            if (feedbackSuccessBanner instanceof HTMLDivElement) {
+              feedbackSuccessBanner.dataset.state = "success";
+              feedbackSuccessBanner.textContent =
+                payload.message ||
+                "Сообщение отправлено. Мы получили заявку и свяжемся с вами по указанным контактам.";
+              feedbackSuccessBanner.hidden = false;
+            }
+          } catch (error) {
+            if (feedbackSuccessBanner instanceof HTMLDivElement) {
+              feedbackSuccessBanner.dataset.state = "error";
+              feedbackSuccessBanner.textContent =
+                error instanceof Error
+                  ? error.message
+                  : "Не удалось отправить сообщение. Попробуйте ещё раз чуть позже.";
+              feedbackSuccessBanner.hidden = false;
+            }
+          } finally {
+            feedbackSubmitButton.textContent = feedbackSubmitLabel || "Отправить сообщение";
+            syncFeedbackSubmitState();
+          }
+        });
       }
 
       pricingPlanButtons.forEach((button) => {

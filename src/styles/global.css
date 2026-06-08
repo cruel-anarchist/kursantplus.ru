@@ -2851,6 +2851,13 @@ code {
   line-height: 1.55;
 }
 
+.feedback-form-card__status[data-state="error"] {
+  border-color: rgba(179, 32, 37, 0.24);
+  color: var(--color-red-700);
+  background:
+    linear-gradient(180deg, rgba(179, 32, 37, 0.12), rgba(255, 255, 255, 0.96));
+}
+
 .feedback-form {
   display: grid;
   gap: 1rem;
@@ -2915,6 +2922,41 @@ code {
 
 .feedback-form__submit {
   justify-self: start;
+}
+
+.feedback-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.72rem;
+  color: var(--color-slate-700);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.feedback-form__consent input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.16rem;
+  accent-color: var(--color-gold-500);
+  flex: 0 0 auto;
+}
+
+.feedback-form__consent a {
+  color: var(--color-navy-900);
+  font-weight: 700;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.feedback-form__consent a:hover {
+  color: var(--color-red-700);
+}
+
+.feedback-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  filter: grayscale(0.12);
+  box-shadow: none;
 }
 
 .contact-card--primary {
@@ -3163,6 +3205,14 @@ code {
   margin: 0.6rem 0 0;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
+}
+
+.site-footer__disclaimer {
+  max-width: 34rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.82rem;
+  line-height: 1.6;
 }
 
 .site-footer__contacts {
@@ -4335,6 +4385,14 @@ body[data-vision-mode="accessible"] .hero__stats div {
   box-shadow: none !important;
 }
 
+body[data-vision-mode="accessible"] {
+  --accessible-panel-offset: 4.8rem;
+}
+
+body[data-vision-mode="accessible"] .site-header {
+  top: var(--accessible-panel-offset);
+}
+
 body[data-vision-mode="accessible"] .hero::before,
 body[data-vision-mode="accessible"] .section--dark::before,
 body[data-vision-mode="accessible"] .hero__background,
@@ -4517,6 +4575,7 @@ body[data-vision-mode="accessible"] {
 
 body[data-vision-mode="accessible"] .finance-card,
 body[data-vision-mode="accessible"] .service-card,
+body[data-vision-mode="accessible"] .service-card--accent,
 body[data-vision-mode="accessible"] .fleet-card,
 body[data-vision-mode="accessible"] .docs-section__content,
 body[data-vision-mode="accessible"] .docs-section__aside,
@@ -4608,8 +4667,8 @@ body[data-vision-mode="accessible"] .info-badge__icon-shell,
 body[data-vision-mode="accessible"] .theory-mode-tile__icon,
 body[data-vision-mode="accessible"] .program-card__crest,
 body[data-vision-mode="accessible"] .site-header__menu-toggle {
-  border: 1px solid currentColor !important;
-  background: transparent !important;
+  border: 2px solid #000000 !important;
+  background: #ffffff !important;
   box-shadow: none !important;
 }
 
@@ -4618,6 +4677,10 @@ body[data-vision-mode="accessible"] .theory-mode-tile__icon .info-badge__icon,
 body[data-vision-mode="accessible"] .brand img,
 body[data-vision-mode="accessible"] .fleet-card__media img {
   filter: grayscale(1) contrast(1.2);
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .program-card__crest {
+  background: #ffffff url("/images/graphics/crest-outline.svg") center/62% no-repeat !important;
 }
 
 body[data-vision-mode="accessible"] .section-heading h2,
@@ -4656,6 +4719,101 @@ body[data-vision-mode="accessible"] .site-footer__detail strong,
 body[data-vision-mode="accessible"] .hero__stats dd {
   font-size: var(--accessible-heading-md) !important;
   line-height: 1.25 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card__highlight span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside p:last-child {
+  color: #000000 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card__highlight strong,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card__eyebrow {
+  color: #8a5b00 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .program-card h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .program-card p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .info-badge h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .info-badge p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card__footer small,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card__body h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card__body p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside h3,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo strong,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo-note,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .contact-card__detail strong,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .contact-card__schedule strong,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .site-footer__detail strong,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .site-footer__schedule strong {
+  color: #000000 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .section-heading__eyebrow,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .program-card__subtitle,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card__tag,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card__head p,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo-eyebrow,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo-badge,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .contact-card__detail span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .contact-card__schedule span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .site-footer__detail span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .site-footer__schedule span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .timeline__aside-badge span,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card__eyebrow,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card__highlight span {
+  color: #8a5b00 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card--accent,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .finance-card,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .docs-section__aside {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card__tag,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo-badge {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .service-card__price,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .hero__promo-badge {
+  color: #000000 !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .info-badge__icon-shell,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .theory-mode-tile__icon {
+  background: #ffffff !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .info-badge__icon,
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .theory-mode-tile__icon .info-badge__icon {
+  filter: brightness(0) saturate(0) !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card__media {
+  background: #ffffff !important;
+}
+
+body[data-vision-mode="accessible"]:not([data-vision-contrast="dark"]) .fleet-card__media img {
+  filter: none !important;
+}
+
+body[data-vision-mode="accessible"] .hero__promo-note {
+  opacity: 1 !important;
 }
 
 body[data-vision-mode="accessible"] .site-nav a,
@@ -4879,9 +5037,18 @@ body[data-vision-mode="accessible"][data-vision-contrast="dark"] .timeline__asid
   background: #ffffff !important;
 }
 
+body[data-vision-mode="accessible"][data-vision-size="20"] {
+  --accessible-panel-offset: 5.9rem;
+}
+
+body[data-vision-mode="accessible"][data-vision-size="24"] {
+  --accessible-panel-offset: 7rem;
+}
+
 @media (max-width: 1059px) {
   body[data-vision-mode="accessible"] .site-header {
     position: static;
+    top: 0;
   }
 
   body[data-vision-mode="accessible"] .site-header__inner {

@@ -20,6 +20,8 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+deploy/api.kursantplus.ru/config.php
+LOCAL_DEPLOY_SECRETS.md
 
 # macOS-specific files
 .DS_Store

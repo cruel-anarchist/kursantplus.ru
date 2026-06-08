@@ -1,0 +1,45 @@
+---
+import LegalSectionTable from "../components/LegalSectionTable.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { privacySections } from "../data/privacy";
+---
+
+<BaseLayout
+  title="Политика конфиденциальности | Курсант +"
+  description="Политика конфиденциальности и обработки персональных данных сайта автошколы Курсант +."
+  noindex={true}
+>
+  <section class="legal-hero">
+    <div class="container legal-hero__grid">
+      <div>
+        <p class="section-heading__eyebrow">Юридическая информация</p>
+        <h1>Политика конфиденциальности</h1>
+        <p>
+          На этой странице размещена политика конфиденциальности и обработки
+          персональных данных сайта автошколы Курсант +. Документ описывает,
+          какие данные могут обрабатываться через сайт, для каких целей это
+          делается и как пользователь может управлять своими данными.
+        </p>
+      </div>
+
+      <aside class="legal-hero__aside">
+        <h2>Коротко о главном</h2>
+        <p>
+          Сайт может обрабатывать как данные, которые пользователь указывает в
+          формах обратной связи, так и технические данные, связанные с
+          посещением сайта, включая cookie и данные систем аналитики.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-stack">
+      {
+        privacySections.map((section) => (
+          <LegalSectionTable section={section} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

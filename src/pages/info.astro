@@ -35,16 +35,6 @@ import { documentsFolder, legalSections } from "../data/legal";
     </div>
   </section>
 
-  <section class="legal-nav">
-    <div class="container legal-nav__list">
-      {
-        legalSections.map((section) => (
-          <a href={`#${section.id}`}>{section.title}</a>
-        ))
-      }
-    </div>
-  </section>
-
   <section class="section">
     <div class="container legal-stack">
       {
