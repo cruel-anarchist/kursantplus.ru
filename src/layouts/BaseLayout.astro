@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import TopContactStrip from "../components/TopContactStrip.astro";
-import { contacts, siteMeta } from "../data/site";
+import { contacts, siteMeta, socialChannels } from "../data/site";
 import "../styles/global.css";
 
 type Props = {
@@ -41,6 +41,10 @@ const addressParts = contacts.address
   .filter(Boolean);
 const streetAddress = addressParts.length > 1 ? addressParts.slice(1).join(", ") : undefined;
 const addressLocality = addressParts[0]?.replace(/^г\.\s*/i, "").trim() || siteMeta.city;
+const sameAsLinks = [
+  siteRootUrl.toString(),
+  ...socialChannels.map((channel) => channel.href).filter(Boolean),
+];
 
 const openingHoursSpecification = [
   {
@@ -127,7 +131,7 @@ const structuredData = {
         availableLanguage: ["ru"],
         hoursAvailable: openingHoursSpecification,
       },
-      sameAs: [siteRootUrl.toString()],
+      sameAs: sameAsLinks,
       mainEntityOfPage: {
         "@id": pageId,
       },
