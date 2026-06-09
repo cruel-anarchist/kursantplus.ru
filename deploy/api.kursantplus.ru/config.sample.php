@@ -32,4 +32,8 @@ return [
             'http://localhost:4321',
         ],
     ],
+    'admin' => [
+        'username' => 'CHANGE_ME',
+        'password' => 'CHANGE_ME',
+    ],
 ];
