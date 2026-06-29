@@ -1,914 +1,261 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import IconBadge from "../components/IconBadge.astro";
-import PricingCard from "../components/PricingCard.astro";
-import ProgramCard from "../components/ProgramCard.astro";
-import SectionHeading from "../components/SectionHeading.astro";
-import {
-  advantages,
-  learningSteps,
-  learningFormat,
-  pricingPlans,
-  pricingSharedIncludes,
-  programs,
-  theoryModes,
-} from "../data/programs";
-import { contacts, siteMeta, trustFacts } from "../data/site";
-import {
-  enrollmentDocuments,
-  extraServicesCatalog,
-  financialOptions,
-  fleetCars,
-  priceIncludes,
-  supportFeatures,
-  trainingGroundElements,
-} from "../data/services";
+import { contacts, siteMeta } from "../data/site";
 
 const phoneHref = `tel:${contacts.phone.replace(/\s+/g, "")}`;
 const emailHref = `mailto:${contacts.email}`;
-const feedbackApiUrl = "https://api.kursantplus.ru/form-handler.php";
 ---
 
 <BaseLayout
-  title="Автошкола Курсант + в Москве | Подготовка водителей категории B"
-  description={siteMeta.description}
+  title="Курсант + | Сайт временно недоступен"
+  description="На сайте автошколы Курсант + ведутся технические работы. Скоро вернёмся."
+  noindex={true}
 >
-  <section class="hero">
-    <div class="hero__background" aria-hidden="true" data-parallax data-parallax-speed="46"></div>
-    <div class="container hero__grid">
-      <div class="hero__content">
-        <p class="hero__lead">Официальная автошкола категории B</p>
-        <h2>{siteMeta.heroTitle}</h2>
-        <p class="hero__location">{siteMeta.heroLocation}</p>
-        <p class="hero__text">{siteMeta.heroText}</p>
-        <div class="hero__actions">
-          <a class="button button--primary" href="#contacts">Записаться на обучение</a>
-          <a class="button button--ghost" href="#pricing">Смотреть тарифы</a>
-        </div>
-        <ul class="hero__trust">
-          {
-            trustFacts.map((fact) => <li>{fact}</li>)
-          }
-        </ul>
-        <dl class="hero__stats">
-          <div data-parallax data-parallax-speed="22">
-            <dt>Коробки передач</dt>
-            <dd>МКПП и АКПП</dd>
-          </div>
-          <div data-parallax data-parallax-speed="26">
-            <dt>Срок обучения</dt>
-            <dd>2,5 - 3,5 месяца</dd>
-          </div>
-          <div data-parallax data-parallax-speed="30">
-            <dt>Стоимость</dt>
-            <dd class="hero__stats-value--price">
-              от {siteMeta.priceFrom} до {siteMeta.priceTo}
-            </dd>
-          </div>
-        </dl>
-      </div>
+  <section class="maintenance-page">
+    <div class="maintenance-page__ambient" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-      <a
-        class="hero__promo"
-        href="#pricing"
-        data-parallax
-        data-parallax-speed="20"
-      >
-        <span class="hero__promo-eyebrow">Спецпредложение 3-х дней</span>
-        <span class="hero__promo-badge">-3 000 ₽</span>
-        <strong>Оставьте заявку через сайт и получите скидку на обучение</strong>
-        <p>
-          * Скидка действует 3 дня с момента оформления заявки через сайт.
+    <div class="maintenance-page__shell">
+      <div class="maintenance-page__content">
+        <p class="maintenance-page__status">Технические работы</p>
+        <h1>{siteMeta.name}</h1>
+        <p class="maintenance-page__lead">
+          Сайт временно недоступен: мы обновляем материалы и проверяем корректность разделов.
+          Пожалуйста, свяжитесь с нами напрямую, если вопрос срочный.
         </p>
-        <span class="hero__promo-note">* Только для записи с сайта</span>
-      </a>
 
-      <div class="hero__visual" data-parallax data-parallax-speed="24">
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--band" id="programs">
-    <div class="container">
-      <SectionHeading
-        title="Программы обучения"
-      />
-      <div class="programs-intro">
-        <div class="programs-intro__card" data-parallax data-parallax-speed="18">
-          <strong>Один фокус, две траектории, четыре тарифа</strong>
-        </div>
-        <p>
-          Программы собраны так, чтобы выбор был понятным с первого взгляда:
-          категория B, два формата коробки передач и четыре уровня подготовки под
-          разный запрос, темп обучения, желаемый объём практики и уверенный
-          выход к самостоятельному вождению.
-        </p>
-      </div>
-      <div class="grid grid--two">
-        {
-          programs.map((program) => (
-            <ProgramCard {...program} />
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="pricing">
-    <div class="container">
-      <SectionHeading
-        title="Четыре формата подготовки"
-      />
-      <div class="pricing-intro">
-        <div class="pricing-intro__note">
-          <p>
-            Каждый тариф отличается объёмом практики, темпом обучения и уровнем
-            сопровождения: от ускоренного формата для тех, кто уже водит, до
-            расширенного курса с максимальным объёмом практики.
-          </p>
-        </div>
-        <div class="pricing-intro__includes">
-          <span>Во всех тарифах</span>
-          <ul>
-            {
-              pricingSharedIncludes.map((item) => <li>{item}</li>)
-            }
-          </ul>
+        <div class="maintenance-page__actions">
+          <a class="maintenance-page__button maintenance-page__button--primary" href={phoneHref}>
+            Позвонить
+          </a>
+          <a class="maintenance-page__button" href={emailHref}>
+            Написать на почту
+          </a>
         </div>
       </div>
-      <div class="grid pricing-grid">
-        {
-          pricingPlans.map((plan) => (
-            <PricingCard {...plan} />
-          ))
-        }
-      </div>
-    </div>
-  </section>
 
-  <section class="section section--dark">
-    <div class="container">
-      <SectionHeading
-        title="Финансовые условия и специальные предложения"
-      />
-      <div class="finance-grid">
-        {
-          financialOptions.map((option) => (
-            <article class="finance-card" data-parallax data-parallax-speed="20">
-              <div class="finance-card__top">
-                <p class="finance-card__eyebrow">{option.title}</p>
-                <div class="finance-card__highlight">
-                  <strong>{option.highlight}</strong>
-                  {option.suffix && <span>{option.suffix}</span>}
-                </div>
-              </div>
-              <p>{option.text}</p>
-              <ul>
-                {
-                  option.bullets.map((bullet) => <li>{bullet}</li>)
-                }
-              </ul>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--band section--interactive-feature section--price-feature">
-    <div class="container">
-      <SectionHeading
-        title="Что входит в стоимость"
-      />
-      <details class="timeline-reveal price-reveal" data-parallax data-parallax-speed="12">
-        <summary class="timeline-reveal__summary price-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Посмотрите, что уже включено в стоимость обучения без скрытых доплат</h3>
-            <p>
-              Внутри собраны ключевые составляющие курса: теория, практика,
-              внутренняя подготовка и организационные этапы перед экзаменом.
-            </p>
-          </div>
-          <div class="timeline-reveal__meta price-reveal__meta">
-            <strong>{priceIncludes.length} пунктов</strong>
-            <p>Основные элементы курса в одном раскрывающемся блоке</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть состав</span>
-              <span class="timeline-reveal__action-close">Скрыть состав</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <div class="grid grid--three">
-            {
-              priceIncludes.map((item) => (
-                <IconBadge title={item.title} text={item.text} icon={item.icon} />
-              ))
-            }
-          </div>
+      <aside class="maintenance-card" aria-label="Контакты автошколы">
+        <div>
+          <span>Телефон</span>
+          <a href={phoneHref}>{contacts.phone}</a>
         </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--dark section--interactive-feature section--advantages-feature">
-    <div class="container">
-      <SectionHeading
-        title="Почему Курсант +"
-      />
-      <details class="timeline-reveal advantages-reveal" data-parallax data-parallax-speed="12">
-        <summary class="timeline-reveal__summary advantages-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Посмотрите, за счёт чего обучение здесь выстроено спокойно и последовательно</h3>
-            <p>
-              Внутри собраны основные преимущества: формат подготовки,
-              сопровождение, выбор коробки передач и логика обучения до экзамена.
-            </p>
-          </div>
-          <div class="timeline-reveal__meta advantages-reveal__meta">
-            <strong>{advantages.length} преимуществ</strong>
-            <p>Ключевые сильные стороны автошколы в одном блоке</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть преимущества</span>
-              <span class="timeline-reveal__action-close">Скрыть преимущества</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <div class="grid grid--three">
-            {
-              advantages.map((item, index) => (
-                <IconBadge
-                  title={item.title}
-                  text={item.text}
-                  icon={item.icon}
-                  variant={index % 2 === 0 ? "dark" : "light"}
-                />
-              ))
-            }
-          </div>
+        <div>
+          <span>Email</span>
+          <a href={emailHref}>{contacts.email}</a>
         </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--interactive-feature section--format-feature">
-    <div class="container">
-      <SectionHeading
-        title="Форматы обучения"
-      />
-      <details class="timeline-reveal format-reveal" data-parallax data-parallax-speed="12">
-        <summary class="timeline-reveal__summary format-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Выберите формат обучения под свой график и ритм жизни</h3>
-            <p>
-              Внутри собраны очный, дистанционный и онлайн-форматы, а также
-              объяснение, как сочетаются теория, практика и удобный график.
-            </p>
-          </div>
-          <div class="timeline-reveal__meta format-reveal__meta">
-            <strong>3 формата</strong>
-            <p>Очно, дистанционно и онлайн-доступ к материалам</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть форматы</span>
-              <span class="timeline-reveal__action-close">Скрыть форматы</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <div class="format-grid">
-            <div class="format-grid__left">
-              <div class="format-grid__main" data-parallax data-parallax-speed="24">
-                <h3>Категория B без лишней сложности</h3>
-                <p>
-                  Обучение сосредоточено на подготовке водителей категории B на
-                  механике и автомате. Формат можно подобрать под свой график:
-                  очные занятия, дистанционные встречи с преподавателем и
-                  онлайн-доступ к материалам работают как единая понятная система.
-                </p>
-                <p>
-                  Если нет времени приезжать на старте, можно заранее дистанционно
-                  обсудить курс, формат теории и коробку передач, а затем спокойно
-                  перейти к оформлению и расписанию занятий. Это снижает
-                  тревожность, помогает настроиться на обучение и делает запись на
-                  курс проще.
-                </p>
-              </div>
-              <div class="theory-modes">
-                {
-                  theoryModes.map((mode) => (
-                    <article
-                      class:list={[
-                        "theory-mode-tile",
-                        mode.title === "Онлайн-обучение" && "theory-mode-tile--online",
-                        mode.title === "Дистант-обучение" && "theory-mode-tile--remote",
-                      ]}
-                      data-parallax
-                      data-parallax-speed="18"
-                    >
-                      <div class="info-badge__icon-shell theory-mode-tile__icon" aria-hidden="true">
-                        <img class="info-badge__icon" src={mode.icon} alt="" width="40" height="40" />
-                      </div>
-                      <div class="theory-mode-tile__content">
-                        <h3>{mode.title}</h3>
-                        <p>{mode.text}</p>
-                      </div>
-                    </article>
-                  ))
-                }
-              </div>
-            </div>
-            <div class="format-grid__cards">
-              {
-                learningFormat.map((item) => (
-                  <IconBadge
-                    title={item.title}
-                    text={item.text}
-                    icon={item.icon}
-                    className={
-                      item.title === "Теория"
-                        ? "format-grid__card format-grid__card--theory"
-                        : item.title === "Практика"
-                          ? "format-grid__card format-grid__card--practice"
-                          : "format-grid__card format-grid__card--schedule"
-                    }
-                  />
-                ))
-              }
-            </div>
-          </div>
+        <div>
+          <span>График</span>
+          <strong>{contacts.schedule.hours}</strong>
+          <p>{contacts.schedule.workdays}</p>
         </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--interactive-feature section--timeline-feature" id="process">
-    <div class="container timeline">
-      <SectionHeading
-        title="Как проходит обучение"
-      />
-      <details class="timeline-reveal" data-parallax data-parallax-speed="14">
-        <summary class="timeline-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Посмотрите весь путь обучения от заявки до экзамена в ГИБДД</h3>
-            <p>
-              Внутри собраны все ключевые этапы: выбор формата, теория,
-              практика, внутренняя подготовка и выход на финальный этап.
-            </p>
-          </div>
-          <div class="timeline-reveal__meta">
-            <strong>{learningSteps.length} этапов</strong>
-            <p>Понятно, по порядку и без лишней спешки</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть этапы</span>
-              <span class="timeline-reveal__action-close">Скрыть этапы</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <div class="timeline__board">
-            <ol class="timeline__list">
-              {
-                learningSteps.map((step, index) => (
-                  <li>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{step}</strong>
-                  </li>
-                ))
-              }
-            </ol>
-            <aside class="timeline__aside" data-parallax data-parallax-speed="20">
-              <h3>Путь ученика без перегруза</h3>
-              <p>
-                Обучение выстроено по понятной последовательности: от первого
-                обращения и выбора подходящего формата до практики, внутренней
-                подготовки и выхода к экзамену в ГИБДД. Такой маршрут помогает
-                заранее видеть весь процесс и спокойнее двигаться по каждому этапу.
-              </p>
-              <p>
-                На каждом шаге ученик понимает, что будет дальше: когда начинается
-                теория, как согласовывается практика, что проверяется перед
-                экзаменом и как автошкола сопровождает до финального этапа.
-              </p>
-              <div class="timeline__aside-badge">
-                <span>Этапы обучения</span>
-                <strong>От заявки до выхода к экзамену</strong>
-              </div>
-              <ul class="timeline__aside-points">
-                <li>Понятный порядок действий без лишней спешки</li>
-                <li>Прозрачный переход от теории к практике</li>
-                <li>Подготовка к экзамену с сопровождением до результата</li>
-              </ul>
-            </aside>
-          </div>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--interactive-feature section--services-feature">
-    <div class="container">
-      <SectionHeading
-        title="Дополнительные услуги и поддержка"
-      />
-      <details class="timeline-reveal services-reveal" data-parallax data-parallax-speed="12">
-        <summary class="timeline-reveal__summary services-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Выберите дополнительный формат: от пробного урока до спецподготовки и отдельных практических занятий</h3>
-            <p>
-              Внутри собраны дополнительные услуги, отдельные практические
-              форматы и поддержка, которую можно подключить до, во время и после
-              основного курса.
-            </p>
-            <div class="services-reveal__focus">
-              <div class="services-reveal__focus-card">
-                <span>Пробный урок</span>
-                <strong>5 000 ₽</strong>
-                <p>3 часа знакомства с практикой • мягкий вход в обучение</p>
-              </div>
-              <div class="services-reveal__focus-card">
-                <span>Иностранным гражданам</span>
-                <strong>20 000 ₽</strong>
-                <p>Подготовка для получения водительского удостоверения РФ</p>
-              </div>
-            </div>
-          </div>
-          <div class="timeline-reveal__meta services-reveal__meta">
-            <strong>{extraServicesCatalog.length} услуг</strong>
-            <p>Пробный урок, спецкурсы, отдельная практика и дополнительная поддержка</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть услуги</span>
-              <span class="timeline-reveal__action-close">Скрыть услуги</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <div class="service-cards">
-            {
-              extraServicesCatalog.map((service) => (
-                <article
-                  class:list={[
-                    "service-card",
-                    service.accent && "service-card--accent",
-                  ]}
-                  data-parallax
-                  data-parallax-speed="20"
-                >
-                  <div class="service-card__head">
-                    {service.tag && <span class="service-card__tag">{service.tag}</span>}
-                    <h3>{service.title}</h3>
-                    <p>{service.meta}</p>
-                  </div>
-                  <p>{service.text}</p>
-                  <div class="service-card__footer">
-                    <a
-                      class="service-card__price"
-                      href="#contacts"
-                      data-service-choice={service.title}
-                      data-service-topic={service.title === "Пробный урок на автомобиле с АКПП" ? "Пробный урок" : "Запись на обучение"}
-                    >
-                      Записаться - {service.price}
-                    </a>
-                    {service.priceNote && <small>{service.priceNote}</small>}
-                  </div>
-                </article>
-              ))
-            }
-          </div>
-          <div class="grid grid--three support-grid">
-            {
-              supportFeatures.map((item) => (
-                <IconBadge title={item.title} text={item.text} icon={item.icon} />
-              ))
-            }
-          </div>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--band section--interactive-feature section--fleet-feature">
-    <div class="container fleet-section">
-      <div class="fleet-section__intro">
-      <SectionHeading
-        title="Автопарк и маршруты подготовки"
-      />
-      </div>
-      <details class="timeline-reveal fleet-reveal" data-parallax data-parallax-speed="12">
-        <summary class="timeline-reveal__summary fleet-reveal__summary">
-          <div class="timeline-reveal__copy">
-            <span class="timeline-reveal__eyebrow">Нажмите, чтобы раскрыть</span>
-            <h3>Практический этап: площадка, манёвры и спокойный переход к маршрутам подготовки</h3>
-            <p>
-              Внутри собраны ключевые элементы практики: парковка, эстакада,
-              задний ход, работа с базовыми упражнениями и переход к более
-              уверенной езде в городе.
-            </p>
-          </div>
-          <div class="timeline-reveal__meta fleet-reveal__meta">
-            <strong>{trainingGroundElements.length} этапа</strong>
-            <p>Площадки, маршруты подготовки и доступ к автопарку в одном блоке</p>
-            <span class="timeline-reveal__action">
-              <span class="timeline-reveal__action-open">Открыть практику</span>
-              <span class="timeline-reveal__action-close">Скрыть практику</span>
-            </span>
-          </div>
-        </summary>
-
-        <div class="timeline-reveal__content">
-          <article class="fleet-section__brief fleet-section__brief--expanded" data-parallax data-parallax-speed="18">
-            <h3>Тренировочные площадки Курсант +</h3>
-            <p>
-              После теории и промежуточной подготовки практика начинается в
-              спокойной среде: на площадке ученик последовательно осваивает
-              базовые элементы вождения, привыкает к автомобилю и убирает лишнюю
-              тревожность перед выездом в город.
-            </p>
-            <p>
-              Такой этап нужен не для формальности. Он помогает заранее отработать
-              ключевые упражнения, с которыми человек столкнётся при подготовке и
-              сдаче экзамена в ГИБДД, чтобы на финальном этапе не было ощущения
-              неожиданности.
-            </p>
-            <p>
-              Практику можно выстраивать так, чтобы она органично входила в
-              обычный день: ближе к дому, работе или привычным маршрутам по
-              городу, без лишних переездов через всю Москву.
-            </p>
-            <div class="fleet-section__highlight">
-              <span class="fleet-section__highlight-eyebrow">Где проходит практика</span>
-              <strong>ЗАО / ЮЗАО / Новая Москва</strong>
-              <p class="fleet-section__highlight-lead">
-                Внутренние экзамены принимаются на площадке рядом с м.
-                Ново-Переделкино: Боровское шоссе, 51, стр. 1.
-              </p>
-              <p class="fleet-section__highlight-text">
-                Для практики доступны удобные точки рядом с Юго-Западной,
-                Проспектом Вернадского, Ясенево, Калужской, Профсоюзной,
-                Черемушками, Лесопарковой, Теплым Станом, Ольховой, Озерной,
-                Беляево, Варшавской, Аннино, Лобненской, а также в районах
-                Солнцево, Внуково, Рассказовка, Говорово, Саларьево,
-                Коммунарка, Марушкино, Кокошкино и Ново-Переделкино.
-              </p>
-            </div>
-            <details class="fleet-cars-toggle">
-              <summary class="fleet-cars-toggle__summary">
-                <div class="fleet-cars-toggle__copy">
-                  <span class="fleet-cars-toggle__eyebrow">Учебные автомобили</span>
-                  <strong>Ознакомьтесь с автопарком, на котором проходит практическая подготовка</strong>
-                  <p>
-                    Внутри собраны учебные автомобили категории B, на которых
-                    проходит практика и отработка маршрутов.
-                  </p>
-                </div>
-                <span class="fleet-cars-toggle__button">
-                  <span class="fleet-cars-toggle__label-open">Открыть автопарк</span>
-                  <span class="fleet-cars-toggle__label-close">Скрыть автопарк</span>
-                </span>
-              </summary>
-              <div class="fleet-cars-toggle__content">
-                <div class="fleet-grid">
-                  {
-                    fleetCars.map((car, index) => (
-                      <article class="fleet-card fleet-card--car" data-parallax data-parallax-speed="24">
-                        <div class="fleet-card__media">
-                          <img src={car.image} alt={car.title} loading="lazy" />
-                        </div>
-                        <div class="fleet-card__body">
-                          <span>{String(index + 1).padStart(2, "0")}</span>
-                          <h3>{car.title}</h3>
-                          <p>Учебный автомобиль автопарка для практической подготовки категории B.</p>
-                        </div>
-                      </article>
-                    ))
-                  }
-                </div>
-              </div>
-            </details>
-          </article>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="section section--band">
-    <div class="container docs-section">
-      <div class="docs-section__content">
-        <SectionHeading
-          title="Документы для зачисления"
-          text="Перед записью важно заранее подготовить необходимые документы, чтобы оформление прошло спокойно, быстро и без лишних уточнений."
-        />
-        <p class="docs-section__lead">Для записи на обучение нужны следующие документы:</p>
-        <ul class="docs-section__list">
-          {
-            enrollmentDocuments.map((item) => <li>{item}</li>)
-          }
-        </ul>
-      </div>
-      <aside class="docs-section__aside" data-parallax data-parallax-speed="18">
-        <h3>Понятный старт записи</h3>
-        <p>
-          Перед записью важно сразу понимать, какие документы понадобятся для
-          оформления. Когда список собран заранее, старт обучения проходит
-          спокойнее, быстрее и без лишних уточнений.
-        </p>
       </aside>
     </div>
   </section>
-
-  <section class="section section--band">
-    <div class="container official-callout" data-parallax data-parallax-speed="16">
-      <div class="official-callout__content">
-        <h2>Сведения об образовательной организации</h2>
-        <p>Здесь размещаются лицензия, локальные акты, сведения об обучении и другие обязательные материалы.</p>
-      </div>
-      <div class="official-callout__actions">
-        <a class="button button--primary" href="/info">
-          Открыть раздел
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contacts">
-    <div class="container contacts">
-      <SectionHeading
-        title="Контакты"
-      />
-      <div class="contacts__grid">
-        <article class="contact-card contact-card--primary" data-parallax data-parallax-speed="18">
-          <h3>Как связаться</h3>
-          <div class="contact-card__details">
-            <div class="contact-card__detail">
-              <span>Телефон</span>
-              <strong><a href={phoneHref}>{contacts.phone}</a></strong>
-            </div>
-            <div class="contact-card__detail">
-              <span>Email</span>
-              <strong><a href={emailHref}>{contacts.email}</a></strong>
-            </div>
-            <div class="contact-card__detail">
-              <span>Адрес</span>
-              <strong>{contacts.address}</strong>
-            </div>
-          </div>
-          <div class="contact-card__schedule">
-            <span>График работы</span>
-            <strong>{contacts.schedule.hours}</strong>
-            <p>{contacts.schedule.workdays}</p>
-            <p>{contacts.schedule.weekends} — {contacts.schedule.note}</p>
-          </div>
-        </article>
-
-        <article class="contact-card contact-card--accent" data-parallax data-parallax-speed="20">
-          <h3>Что можно уточнить сразу</h3>
-          <ul>
-            <li>Подходящий тариф и стоимость</li>
-            <li>МКПП или АКПП под ваш запрос</li>
-            <li>Можно ли начать с пробного урока</li>
-            <li>Рассрочку и возможность налогового вычета</li>
-            <li>Оформление договора онлайн, если нет времени приезжать</li>
-            <li>Удобный график начала обучения</li>
-            <li>Какие документы подготовить к записи и старту обучения</li>
-          </ul>
-        </article>
-
-        <article class="contact-card contact-card--outline" data-parallax data-parallax-speed="18">
-          <h3>Что согласуем перед стартом</h3>
-          <ul>
-            <li>Формат теории: очно, онлайн или дистанционно</li>
-            <li>Подходящее время практических занятий</li>
-            <li>Предпочтения по инструктору и темпу обучения</li>
-            <li>Дополнительные занятия для уверенности при необходимости</li>
-            <li>Маршрут подготовки от записи до экзамена в ГИБДД</li>
-          </ul>
-        </article>
-      </div>
-      <div class="feedback-block" data-parallax data-parallax-speed="16">
-        <div class="feedback-block__intro">
-          <span>Обратная связь</span>
-          <h3>Оставьте заявку или вопрос</h3>
-          <p>
-            Если удобнее написать, чем звонить, можно оставить сообщение через
-            форму. Заявка придёт на {contacts.email}, и по ней можно будет
-            уточнить запись, тариф, формат обучения и организационные вопросы,
-            включая дистанционный старт и оформление без обязательного визита в
-            автошколу на первом шаге.
-          </p>
-          <div class="feedback-block__points">
-            <p>Подходит для первичной заявки, вопросов по записи и уточнения деталей.</p>
-            <p>Можно оставить телефон, чтобы связаться в удобном формате.</p>
-          </div>
-        </div>
-        <div class="feedback-form-card">
-          <div class="feedback-form-card__status" data-feedback-success hidden>
-            Сообщение отправлено. Мы получили заявку и свяжемся с вами по указанным контактам.
-          </div>
-          <form
-            class="feedback-form"
-            action={feedbackApiUrl}
-            method="POST"
-            data-feedback-form
-          >
-            <input type="text" name="_honey" class="feedback-form__honey" tabindex="-1" autocomplete="off" />
-            <input type="hidden" name="page_url" value="" data-feedback-page-url />
-
-            <label class="feedback-form__field">
-              <span>Имя</span>
-              <input type="text" name="name" placeholder="Как к вам обращаться" required />
-            </label>
-
-            <div class="feedback-form__row">
-              <label class="feedback-form__field">
-                <span>Телефон</span>
-                <input type="tel" name="phone" placeholder="+7 900 000 00 00" required />
-              </label>
-              <label class="feedback-form__field">
-                <span>Email</span>
-                <input type="email" name="email" placeholder={contacts.email} />
-              </label>
-            </div>
-
-            <label class="feedback-form__field">
-              <span>Тема обращения</span>
-              <select name="topic" required data-feedback-topic>
-                <option value="Запись на обучение">Запись на обучение</option>
-                <option value="Пробный урок">Пробный урок</option>
-                <option value="Другое">Другое</option>
-              </select>
-            </label>
-
-            <label class="feedback-form__field">
-              <span>Сообщение</span>
-              <textarea
-                name="message"
-                rows="5"
-                placeholder="Напишите, что хотите уточнить: формат обучения, тариф, запись, пробный урок или другой вопрос."
-                data-feedback-message
-                required
-              ></textarea>
-            </label>
-
-            <label class="feedback-form__consent">
-              <input type="checkbox" name="privacy_consent" value="yes" required data-feedback-consent />
-              <span>
-                Я ознакомлен(а) с
-                <a href="/privacy" target="_blank" rel="noreferrer">политикой конфиденциальности</a>
-              </span>
-            </label>
-
-            <button class="button button--primary feedback-form__submit" type="submit">
-              Отправить сообщение
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <script is:inline>
-      const feedbackSuccessBanner = document.querySelector("[data-feedback-success]");
-      const feedbackSearchParams = new URLSearchParams(window.location.search);
-      const feedbackForm = document.querySelector("[data-feedback-form]");
-      const feedbackPageUrlField = document.querySelector("[data-feedback-page-url]");
-      const feedbackTopicField = document.querySelector("[data-feedback-topic]");
-      const feedbackMessageField = document.querySelector("[data-feedback-message]");
-      const feedbackConsentField = document.querySelector("[data-feedback-consent]");
-      const feedbackSubmitButton = document.querySelector(".feedback-form__submit");
-      const pricingPlanButtons = document.querySelectorAll("[data-plan-choice]");
-      const serviceChoiceButtons = document.querySelectorAll("[data-service-choice]");
-      const feedbackSubmitLabel =
-        feedbackSubmitButton instanceof HTMLButtonElement ? feedbackSubmitButton.textContent : "";
-
-      const syncFeedbackSubmitState = () => {
-        if (
-          feedbackConsentField instanceof HTMLInputElement &&
-          feedbackSubmitButton instanceof HTMLButtonElement
-        ) {
-          feedbackSubmitButton.disabled = !feedbackConsentField.checked;
-        }
-      };
-
-      if (feedbackPageUrlField instanceof HTMLInputElement) {
-        feedbackPageUrlField.value = window.location.href;
-      }
-
-      syncFeedbackSubmitState();
-
-      if (feedbackConsentField instanceof HTMLInputElement) {
-        feedbackConsentField.addEventListener("change", syncFeedbackSubmitState);
-      }
-
-      if (feedbackSuccessBanner && feedbackSearchParams.get("feedback") === "success") {
-        feedbackSuccessBanner.hidden = false;
-      }
-
-      if (feedbackForm instanceof HTMLFormElement) {
-        feedbackForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-
-          if (!feedbackForm.reportValidity()) {
-            return;
-          }
-
-          if (!(feedbackSubmitButton instanceof HTMLButtonElement)) {
-            feedbackForm.submit();
-            return;
-          }
-
-          feedbackSubmitButton.disabled = true;
-          feedbackSubmitButton.textContent = "Отправляем...";
-
-          const formData = new FormData(feedbackForm);
-
-          if (feedbackPageUrlField instanceof HTMLInputElement) {
-            formData.set("page_url", window.location.href);
-          }
-
-          try {
-            const response = await fetch(feedbackForm.action, {
-              method: "POST",
-              body: formData,
-              headers: {
-                Accept: "application/json",
-              },
-            });
-
-            const payload = await response.json().catch(() => null);
-
-            if (!response.ok || !payload?.ok) {
-              throw new Error(
-                payload?.message ||
-                  "Не удалось отправить сообщение. Попробуйте ещё раз чуть позже."
-              );
-            }
-
-            feedbackForm.reset();
-            syncFeedbackSubmitState();
-
-            if (feedbackSuccessBanner instanceof HTMLDivElement) {
-              feedbackSuccessBanner.dataset.state = "success";
-              feedbackSuccessBanner.textContent =
-                payload.message ||
-                "Сообщение отправлено. Мы получили заявку и свяжемся с вами по указанным контактам.";
-              feedbackSuccessBanner.hidden = false;
-            }
-          } catch (error) {
-            if (feedbackSuccessBanner instanceof HTMLDivElement) {
-              feedbackSuccessBanner.dataset.state = "error";
-              feedbackSuccessBanner.textContent =
-                error instanceof Error
-                  ? error.message
-                  : "Не удалось отправить сообщение. Попробуйте ещё раз чуть позже.";
-              feedbackSuccessBanner.hidden = false;
-            }
-          } finally {
-            feedbackSubmitButton.textContent = feedbackSubmitLabel || "Отправить сообщение";
-            syncFeedbackSubmitState();
-          }
-        });
-      }
-
-      pricingPlanButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const selectedPlan = button.getAttribute("data-plan-choice");
-
-          if (!selectedPlan) return;
-
-          if (feedbackTopicField instanceof HTMLSelectElement) {
-            feedbackTopicField.value = "Запись на обучение";
-          }
-
-          if (feedbackMessageField instanceof HTMLTextAreaElement) {
-            feedbackMessageField.value = `Здравствуйте! Хочу записаться на тариф «${selectedPlan}».`;
-          }
-        });
-      });
-
-      serviceChoiceButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const selectedService = button.getAttribute("data-service-choice");
-          const selectedTopic = button.getAttribute("data-service-topic");
-
-          if (!selectedService) return;
-
-          if (feedbackTopicField instanceof HTMLSelectElement && selectedTopic) {
-            feedbackTopicField.value = selectedTopic;
-          }
-
-          if (feedbackMessageField instanceof HTMLTextAreaElement) {
-            feedbackMessageField.value = `Здравствуйте! Хочу записаться на услугу «${selectedService}».`;
-          }
-        });
-      });
-    </script>
-  </section>
 </BaseLayout>
+
+<style>
+  :global(body) {
+    background:
+      radial-gradient(circle at 14% 12%, rgba(255, 186, 86, 0.18), transparent 28rem),
+      radial-gradient(circle at 86% 20%, rgba(35, 88, 65, 0.16), transparent 30rem),
+      linear-gradient(135deg, #fff7e8 0%, #f4efe4 48%, #efe2d1 100%);
+  }
+
+  .maintenance-page {
+    position: relative;
+    min-height: clamp(560px, 78vh, 820px);
+    overflow: hidden;
+    padding: clamp(4rem, 8vw, 8rem) 1.25rem;
+    color: #253126;
+  }
+
+  .maintenance-page__ambient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .maintenance-page__ambient span {
+    position: absolute;
+    border: 1px solid rgba(37, 49, 38, 0.12);
+    border-radius: 999px;
+    transform: rotate(-12deg);
+  }
+
+  .maintenance-page__ambient span:nth-child(1) {
+    width: 34rem;
+    height: 12rem;
+    left: -8rem;
+    top: 12%;
+  }
+
+  .maintenance-page__ambient span:nth-child(2) {
+    width: 28rem;
+    height: 28rem;
+    right: -10rem;
+    top: 5%;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .maintenance-page__ambient span:nth-child(3) {
+    width: 18rem;
+    height: 18rem;
+    right: 16%;
+    bottom: 8%;
+    border-style: dashed;
+  }
+
+  .maintenance-page__shell {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .maintenance-page__content,
+  .maintenance-card {
+    border: 1px solid rgba(37, 49, 38, 0.12);
+    border-radius: 2rem;
+    background: rgba(255, 252, 246, 0.78);
+    box-shadow: 0 1.5rem 5rem rgba(64, 47, 31, 0.12);
+    backdrop-filter: blur(16px);
+  }
+
+  .maintenance-page__content {
+    padding: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .maintenance-page__status {
+    width: max-content;
+    margin: 0 0 1.4rem;
+    border-radius: 999px;
+    padding: 0.6rem 0.9rem;
+    background: #253126;
+    color: #fff8ec;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .maintenance-page h1 {
+    max-width: 760px;
+    margin: 0;
+    color: #253126;
+    font-size: clamp(3.3rem, 10vw, 8.5rem);
+    line-height: 0.86;
+    letter-spacing: -0.08em;
+  }
+
+  .maintenance-page__lead {
+    max-width: 720px;
+    margin: clamp(1.5rem, 3vw, 2.4rem) 0 0;
+    color: #4d5b50;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    line-height: 1.55;
+  }
+
+  .maintenance-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .maintenance-page__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.35rem;
+    border: 1px solid rgba(37, 49, 38, 0.18);
+    border-radius: 999px;
+    padding: 0 1.35rem;
+    color: #253126;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      background 160ms ease;
+  }
+
+  .maintenance-page__button:hover,
+  .maintenance-page__button:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 0.9rem 1.8rem rgba(64, 47, 31, 0.12);
+  }
+
+  .maintenance-page__button--primary {
+    border-color: #d66b28;
+    background: #d66b28;
+    color: #fff8ec;
+  }
+
+  .maintenance-card {
+    display: grid;
+    align-content: end;
+    gap: 1rem;
+    padding: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .maintenance-card div {
+    border-radius: 1.35rem;
+    padding: 1.1rem;
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  .maintenance-card span {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: #7a6f61;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .maintenance-card a,
+  .maintenance-card strong {
+    color: #253126;
+    font-size: 1.18rem;
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .maintenance-card p {
+    margin: 0.35rem 0 0;
+    color: #5c675f;
+  }
+
+  @media (max-width: 820px) {
+    .maintenance-page {
+      padding-block: 3rem;
+    }
+
+    .maintenance-page__shell {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .maintenance-page__content,
+    .maintenance-card {
+      border-radius: 1.4rem;
+    }
+
+    .maintenance-page__actions {
+      flex-direction: column;
+    }
+
+    .maintenance-page__button {
+      width: 100%;
+    }
+  }
+</style>
